@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 10:32:24
- * @LastEditTime: 2020-10-10 12:25:51
+ * @LastEditTime: 2020-10-10 13:17:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voice\voice\voice.ino
@@ -45,7 +45,6 @@ public:
     pinMode(front_pin, INPUT);
     pinMode(left_pin, INPUT);
     pinMode(right_pin, INPUT);
-    //hahahahahaa
   }
 
   /* return the distance with cm */

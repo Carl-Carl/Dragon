@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-10 12:44:10
+ * @LastEditTime: 2020-10-10 13:36:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -29,10 +29,12 @@
 #define     R_8                 7
 
 /* Motor pins */
-#define     LEFT_1              9
-#define     LEFT_2              10
-#define     RIGHT_1             11
-#define     RIGHT_2             12
+#define     LEFT_E              10
+#define     LEFT_1              8
+#define     LEFT_2              9
+#define     RIGHT_E             11
+#define     RIGHT_1             12
+#define     RIGHT_2             13
 
 /* Bluetooth pins */
 #define     BTX                 0
