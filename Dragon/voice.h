@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 10:32:24
- * @LastEditTime: 2020-10-10 09:28:08
+ * @LastEditTime: 2020-10-10 12:25:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voice\voice\voice.ino
@@ -69,9 +69,8 @@ public:
       qsort(temp, 8, sizeof(u16), [](const void *a, const void *b) {return (int)(*(int*)a < *(int*)b);});
       
       *a[i] = 0;
-      for (u8 j = 2; j < 6; ++j) {
+      for (u8 j = 2; j < 6; ++j)
         *a[i] += temp[j];
-      }
       
       *a[i] >>= 2;
     }

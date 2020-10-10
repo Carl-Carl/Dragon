@@ -6,7 +6,8 @@
                 "D:\\Program Files\\Arduino\\",
                 "D:\\Program Files\\Arduino\\tools\\**",
                 "D:\\Program Files\\Arduino\\hardware\\arduino\\avr\\**",
-                "D:\\Program Files\\Arduino\\hardware\\tools\\avr\\avr\\include"
+                "D:\\Program Files\\Arduino\\hardware\\tools\\avr\\avr\\include",
+                "D:\\Program Files\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\"
             ],
             "forcedInclude": [
                 "D:\\Program Files\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
