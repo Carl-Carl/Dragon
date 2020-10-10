@@ -1,14 +1,14 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-10 14:48:04
+ * @LastEditTime: 2020-10-10 16:02:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
  */
 #ifndef DRAGON
 #define DRAGON
-
+#include <arduino.h>
 
 /* Voice pins */
 #define     VOICE_SEND_PIN      2 // 发射引脚
