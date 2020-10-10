@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-10 12:42:38
+ * @LastEditTime: 2020-10-10 12:44:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -12,7 +12,7 @@
 #include "voice.h"
 #include "motor.h"
 
-/* voice pins */
+/* Voice pins */
 #define     VOICE_SEND_PIN      2 // 发射引脚
 #define     FRONT_PIN           3
 #define     LEFT_PIN            4
@@ -28,7 +28,7 @@
 #define     R_7                 6
 #define     R_8                 7
 
-/* motor pins */
+/* Motor pins */
 #define     LEFT_1              9
 #define     LEFT_2              10
 #define     RIGHT_1             11
