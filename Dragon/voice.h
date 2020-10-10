@@ -45,6 +45,7 @@ public:
     pinMode(front_pin, INPUT);
     pinMode(left_pin, INPUT);
     pinMode(right_pin, INPUT);
+    //hahahahahaa
   }
 
   /* return the distance with cm */
