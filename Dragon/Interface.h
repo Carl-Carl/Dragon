@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-10 13:36:35
+ * @LastEditTime: 2020-10-10 14:48:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -9,8 +9,6 @@
 #ifndef DRAGON
 #define DRAGON
 
-#include "voice.h"
-#include "motor.h"
 
 /* Voice pins */
 #define     VOICE_SEND_PIN      2 // 发射引脚
@@ -40,5 +38,7 @@
 #define     BTX                 0
 #define     BRX                 1
 
+/* 模拟输出最大值 */
+#define     ANALOG_MAX          0xFF
 
 #endif // !DRAGON

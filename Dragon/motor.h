@@ -1,13 +1,16 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-10 12:26:35
- * @LastEditTime: 2020-10-10 13:42:09
+ * @LastEditTime: 2020-10-10 14:44:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\motor.h
  */
 #ifndef MOTOR
 #define MOTOR
+
+#include "Interface.h"
+
 
 class motor
 {

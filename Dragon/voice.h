@@ -10,6 +10,7 @@
 #define VOICE
 
 #include <stdlib.h>
+#include "Interface.h"
 
 /*
  * DIST_INFO 对象用于存储超声波回传的信息

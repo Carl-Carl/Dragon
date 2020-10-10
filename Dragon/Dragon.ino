@@ -1,12 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 11:16:31
- * @LastEditTime: 2020-10-10 14:04:39
+ * @LastEditTime: 2020-10-10 14:42:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Dragon.ino
  */
-#include "Interface.h"
+
+#include "voice.h"
+#include "motor.h"
 
 /* 
  * TEST 为1时，表示测试模式；TEST为0时，表示正式模式
