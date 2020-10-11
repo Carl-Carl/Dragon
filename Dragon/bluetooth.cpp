@@ -41,6 +41,6 @@ bluetooth::bluetooth()
 {
     Modes = REMOTE_FLAG;
     Serial.begin(9600);
+    Serial.println("Srial OK");
     Timer1.attachInterrupt(signal, 50000);  // 50ms 检查一次命令
 }
-

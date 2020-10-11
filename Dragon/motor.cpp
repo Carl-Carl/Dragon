@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-10 12:26:44
- * @LastEditTime: 2020-10-11 15:01:24
+ * @LastEditTime: 2020-10-11 20:51:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\motor.cpp
@@ -41,7 +41,7 @@ void motor::backward()
 
 void motor::turn_left()
 {
-    analogWrite(le, 255 >> 1);
+    analogWrite(le, ANALOG_SLOW);
     analogWrite(re, ANALOG_MAX);
     digitalWrite(l1, LOW);
     digitalWrite(l2, HIGH);
@@ -52,7 +52,7 @@ void motor::turn_left()
 void motor::turn_right()
 {
     analogWrite(le, ANALOG_MAX);
-    analogWrite(re, 255 >> 1);
+    analogWrite(re, ANALOG_SLOW);
     digitalWrite(l1, LOW);
     digitalWrite(l2, HIGH);
     digitalWrite(r1, LOW);
