@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 11:16:31
- * @LastEditTime: 2020-10-10 15:43:40
+ * @LastEditTime: 2020-10-11 10:21:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Dragon.ino
@@ -9,6 +9,7 @@
 
 #include "voice.h"
 #include "motor.h"
+#include "bluetooth.h"
 
 /* 
  * TEST 为1时，表示测试模式；TEST为0时，表示正式模式
@@ -16,19 +17,10 @@
  */
 #define TEST 1
 
-/* 模式标志:
- * 0 : 遥控模式
- * 1 : 红外模式
- * 2 : 超声波模式
- */
-enum MODE_FLAG {
-    remote_flag      =   0,
-    infrared_flag    =   1,
-    voice_flag       =   2,
-} Modes;
-
-/******************** 超声波 ********************/
-/* 超声波模式 */
+/******************** Initialization ********************/
+MODE_FLAG Modes;
+orders Order;
+motor motor_control(LEFT_E, RIGHT_E, LEFT_1, LEFT_2, RIGHT_1, RIGHT_2);
 dist voice_mode(VOICE_SEND_PIN, FRONT_PIN, LEFT_PIN, RIGHT_PIN);
 /* 超声波距离信息 */
 DIST_INFO v_dist_info;
@@ -37,7 +29,6 @@ DIST_INFO v_dist_info;
 
 /******************** 遥控 ********************/
 /* 遥控模式 */
-motor motor_control(LEFT_E, RIGHT_E, LEFT_1, LEFT_2, RIGHT_1, RIGHT_2);
 /***********************************************/
 
 
@@ -47,7 +38,7 @@ motor motor_control(LEFT_E, RIGHT_E, LEFT_1, LEFT_2, RIGHT_1, RIGHT_2);
 void setup ()
 {
     Serial.begin(9600);
-    Modes = remote_flag;
+    Modes = REMOTE_FLAG;
 }
 
 

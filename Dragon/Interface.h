@@ -1,13 +1,13 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-10 16:02:56
+ * @LastEditTime: 2020-10-11 10:09:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
  */
-#ifndef DRAGON
-#define DRAGON
+#ifndef INTERFACE
+#define INTERFACE
 #include <arduino.h>
 
 /* Voice pins */
@@ -40,5 +40,37 @@
 
 /* 模拟输出最大值 */
 #define     ANALOG_MAX          0xFF
+
+
+/* 模式标志:
+ * REMOTE_FLAG   : 遥控模式
+ * INFRARED_FLAG : 红外模式
+ * VOICE_FLAG    : 超声波模式
+ */
+enum MODE_FLAG {
+    REMOTE_FLAG      =   0,
+    INFRARED_FLAG    =   1,
+    VOICE_FLAG       =   2,
+};
+
+/*
+ * 0 : wait
+ * 1 : forward
+ * 2 : backward 
+ * 3 : left
+ * 4 : right
+ * 5 : break;
+ */
+enum orders {
+    wait        =   0,
+    forward     =   1,
+    backward    =   2,
+    left        =   3,
+    right       =   4,
+    brake       =   5,
+};
+
+extern orders Order;
+extern MODE_FLAG Modes;
 
 #endif // !DRAGON

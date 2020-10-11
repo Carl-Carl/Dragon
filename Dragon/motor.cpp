@@ -1,13 +1,12 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-10 12:26:44
- * @LastEditTime: 2020-10-10 16:11:55
+ * @LastEditTime: 2020-10-11 09:22:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\motor.cpp
  */
 #include "motor.h"
-extern u8 Modes;
 
 motor::motor(u8 _le, u8 _re, u8 _l1, u8 _l2, u8 _r1, u8 _r2)
 : le(_le), re(_re), l1(_l1), l2(_l2), r1(_r1), r2(_r2)

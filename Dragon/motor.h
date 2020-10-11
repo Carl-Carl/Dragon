@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-10 12:26:35
- * @LastEditTime: 2020-10-10 16:07:15
+ * @LastEditTime: 2020-10-11 09:03:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\motor.h
@@ -10,7 +10,6 @@
 #define MOTOR
 
 #include "Interface.h"
-
 
 class motor
 {
