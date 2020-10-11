@@ -1,14 +1,16 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-10 16:01:56
+ * @LastEditTime: 2020-10-11 15:24:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
  */
 #include "voice.h"
+#include <stdlib.h>
 
-dist::dist(u8 _send_pin, u8 _front_pin, u8 _left_pin, u8 _right_pin) {
+voice::voice(motor &_control, u8 _send_pin, u8 _front_pin, u8 _left_pin, u8 _right_pin) : control(_control)
+{
     this->send_pin = _send_pin;
     this->front_pin = _front_pin;
     this->left_pin = _left_pin;
@@ -22,8 +24,8 @@ dist::dist(u8 _send_pin, u8 _front_pin, u8 _left_pin, u8 _right_pin) {
     pinMode(right_pin, INPUT);
 }
 
-void dist::get_dist(DIST_INFO &distance) {
-    
+void voice::get_dist(DIST_INFO &distance)
+{    
     u16 *a[3] = {&distance.front, &distance.left, &distance.right};
     u8 ports[3] = {front_pin, left_pin, right_pin};
     u16 temp[8];
@@ -48,4 +50,30 @@ void dist::get_dist(DIST_INFO &distance) {
         
         *a[i] >>= 2;
     }
+}
+
+void voice::mode()
+{
+    while (Modes == VOICE_FLAG) {
+        // get distance information
+        DIST_INFO distance;
+        get_dist(distance);
+        int lr = distance.left - distance.right;
+
+        // control the motor
+        if (distance.left > 30 && distance.right > 30) {
+            control.forward();
+        } else if (lr >= 5) {
+            control.turn_left();
+        } else if (lr <= -5) {
+            control.turn_right();
+        } else {
+            control.forward();
+        }
+
+        delay(50);
+    }
+
+    control.brake();
+    delay(50);
 }

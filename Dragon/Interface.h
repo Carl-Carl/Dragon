@@ -1,11 +1,19 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-11 10:09:58
+ * @LastEditTime: 2020-10-11 15:37:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
  */
+
+/*
+ * 文档说明：
+ * "interface.h"文件包含了所有公共的宏定义、枚举类型和声明
+ * 所有.h文件和主程序均需 #include "interface.h"
+ * PS: 请勿在此直接定义变量
+ */
+
 #ifndef INTERFACE
 #define INTERFACE
 #include <arduino.h>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:45:26
- * @LastEditTime: 2020-10-11 10:37:59
+ * @LastEditTime: 2020-10-11 15:25:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\remote.cpp
@@ -41,4 +41,7 @@ void remote::mode()
         Order = wait;
         delay(50);
     }
+
+    control.brake();
+    delay(50);
 } 

@@ -1,13 +1,16 @@
 /*
  * @Author: your name
  * @Date: 2020-10-11 09:07:03
- * @LastEditTime: 2020-10-11 10:49:04
+ * @LastEditTime: 2020-10-11 15:39:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\bluetooth.cpp
  */
 #include "bluetooth.h"
 
+/*
+ * 蓝牙信号接收-中断服务函数
+ */
 static void signal()
 {
     if (Serial.available()) {
