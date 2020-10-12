@@ -48,8 +48,8 @@
 #define     BRX                 1
 
 /* 模拟输出最大值 */
-#define     ANALOG_MAX          50
-#define     ANALOG_SLOW         25
+#define     ANALOG_MAX          70
+#define     ANALOG_SLOW         60
 
 
 /* 模式标志:
