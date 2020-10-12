@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-10 12:26:44
- * @LastEditTime: 2020-10-12 08:17:04
+ * @LastEditTime: 2020-10-12 10:13:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\motor.cpp
@@ -17,6 +17,12 @@ motor::motor(u8 _le, u8 _re, u8 _l1, u8 _l2, u8 _r1, u8 _r2)
     pinMode(r2, OUTPUT);
 
     brake();
+}
+
+void motor::wait()
+{
+    analogWrite(le, 0);
+    analogWrite(re, 0);
 }
 
 void motor::forward(u8 speed)

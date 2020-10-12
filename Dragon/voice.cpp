@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-12 08:21:40
+ * @LastEditTime: 2020-10-12 10:15:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -73,12 +73,12 @@ void voice::mode()
         // 紧急后退，避免撞击
         if (distance.front < 5) {
             control.backward();
-            delay(300);
+            delay(400);
             continue;
         }
 
         // control the motor
-        u8 speed = (distance.front > 15) ? ANALOG_MAX : ANALOG_SLOW;  // 判断：弯道 或 直道
+        u8 speed = (distance.front > 40) ? ANALOG_MAX : ANALOG_SLOW;  // 判断：弯道 或 直道
 
         if (distance.left > 30 && distance.right > 30) {
             control.forward(speed);
@@ -89,10 +89,5 @@ void voice::mode()
         } else {
             control.forward(speed);
         }
-
-        delay(40);
     }
-
-    control.brake();
-    delay(50);
 }

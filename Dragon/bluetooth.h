@@ -7,7 +7,7 @@
 class bluetooth
 {
 public:
-    bluetooth();
+    bluetooth(int rate);
 };
 
 #endif // !BLUETOOTH

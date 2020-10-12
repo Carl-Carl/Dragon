@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-11 09:07:03
- * @LastEditTime: 2020-10-12 08:25:37
+ * @LastEditTime: 2020-10-12 19:37:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\bluetooth.cpp
@@ -29,7 +29,7 @@ static void signal()
         } // 遥控模式之下，收到命令
         else if ((ch = Serial.read()) == 0x81 && Modes == REMOTE_FLAG) {
             ch = Serial.read();    
-            if (0 <= ch && ch <= 5)
+            if (0 <= ch && ch <= 6)
                 Order = (orders)ch;
         }
 
@@ -37,10 +37,12 @@ static void signal()
     }
 }
 
-bluetooth::bluetooth()
+bluetooth::bluetooth(int rate)
 {
-    Modes = REMOTE_FLAG;
-    Serial.begin(9600);
+    Serial.begin(rate);
+    Serial.println("b");
     Serial.println("bluetooth OK");
+    Serial.println("bluetooth OK");
+    delay(10);
     Timer1.attachInterrupt(signal, 50000);  // 50ms 检查一次命令
 }
