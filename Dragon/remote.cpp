@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:45:26
- * @LastEditTime: 2020-10-11 15:25:04
+ * @LastEditTime: 2020-10-12 08:26:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\remote.cpp
@@ -18,7 +18,7 @@ void remote::mode()
     while (Modes == REMOTE_FLAG) {
         switch (Order) {
         case forward:
-            control.forward();
+            control.forward(ANALOG_MAX);
             break;
 
         case backward:
@@ -26,11 +26,11 @@ void remote::mode()
             break;
 
         case left:
-            control.turn_left();
+            control.turn_left(ANALOG_MAX);
             break;
 
         case right:
-            control.turn_right();
+            control.turn_right(ANALOG_MAX);
             break;
 
         case brake:

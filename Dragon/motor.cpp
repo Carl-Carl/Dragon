@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-10 12:26:44
- * @LastEditTime: 2020-10-11 20:51:47
+ * @LastEditTime: 2020-10-12 08:17:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\motor.cpp
@@ -19,10 +19,10 @@ motor::motor(u8 _le, u8 _re, u8 _l1, u8 _l2, u8 _r1, u8 _r2)
     brake();
 }
 
-void motor::forward()
+void motor::forward(u8 speed)
 {
-    analogWrite(le, ANALOG_MAX);
-    analogWrite(re, ANALOG_MAX);
+    analogWrite(le, speed);
+    analogWrite(re, speed);
     digitalWrite(l1, LOW);
     digitalWrite(l2, HIGH);
     digitalWrite(r1, LOW);
@@ -39,20 +39,20 @@ void motor::backward()
     digitalWrite(r2, LOW);
 }
 
-void motor::turn_left()
+void motor::turn_left(u8 speed)
 {
-    analogWrite(le, ANALOG_SLOW);
-    analogWrite(re, ANALOG_MAX);
+    analogWrite(le, speed >> 2);
+    analogWrite(re, speed);
     digitalWrite(l1, LOW);
     digitalWrite(l2, HIGH);
     digitalWrite(r1, LOW);
     digitalWrite(r2, HIGH);
 }
 
-void motor::turn_right()
+void motor::turn_right(u8 speed)
 {
-    analogWrite(le, ANALOG_MAX);
-    analogWrite(re, ANALOG_SLOW);
+    analogWrite(le, speed);
+    analogWrite(re, speed >> 2);
     digitalWrite(l1, LOW);
     digitalWrite(l2, HIGH);
     digitalWrite(r1, LOW);
@@ -61,8 +61,8 @@ void motor::turn_right()
 
 void motor::brake()
 {
-    analogWrite(le, ANALOG_MAX);
-    analogWrite(re, ANALOG_MAX);
+    analogWrite(le, 255);
+    analogWrite(re, 255);
     digitalWrite(l1, LOW);
     digitalWrite(l2, LOW);
     digitalWrite(r1, LOW);

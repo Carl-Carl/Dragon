@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 11:16:31
- * @LastEditTime: 2020-10-11 21:04:31
+ * @LastEditTime: 2020-10-12 08:24:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Dragon.ino
@@ -40,8 +40,11 @@ voice voice_mode(motor_control, VOICE_SEND_PIN, FRONT_PIN, LEFT_PIN, RIGHT_PIN);
  */
 void setup ()
 {
+#if TEST
     Serial.begin(9600);
     Serial.println("setup OK");
+#endif
+
     Modes = VOICE_FLAG;
 }
 

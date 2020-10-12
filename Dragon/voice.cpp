@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-11 21:02:54
+ * @LastEditTime: 2020-10-12 08:21:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -40,7 +40,7 @@ void voice::get_dist(DIST_INFO &distance)
             delayMicroseconds(10);
             digitalWrite(send_pin, LOW);
 
-            temp[j] = pulseIn(ports[i], HIGH, 180000)/59;
+            temp[j] = pulseIn(ports[i], HIGH, 10000)/59;
         }
 
         // sort and get the average
@@ -70,18 +70,27 @@ void voice::mode()
         Serial.println(distance.right);
         Serial.println();
 
-        // control the motor
-        if (distance.left > 30 && distance.right > 30) {
-            control.forward();
-        } else if (lr >= 3) {
-            control.turn_left();
-        } else if (lr <= -3) {
-            control.turn_right();
-        } else {
-            control.forward();
+        // 紧急后退，避免撞击
+        if (distance.front < 5) {
+            control.backward();
+            delay(300);
+            continue;
         }
 
-        delay(50);
+        // control the motor
+        u8 speed = (distance.front > 15) ? ANALOG_MAX : ANALOG_SLOW;  // 判断：弯道 或 直道
+
+        if (distance.left > 30 && distance.right > 30) {
+            control.forward(speed);
+        } else if (lr >= 3) {
+            control.turn_left(speed);
+        } else if (lr <= -3) {
+            control.turn_right(speed);
+        } else {
+            control.forward(speed);
+        }
+
+        delay(40);
     }
 
     control.brake();
