@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-11 15:37:16
+ * @LastEditTime: 2020-10-12 08:16:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -47,7 +47,8 @@
 #define     BRX                 1
 
 /* 模拟输出最大值 */
-#define     ANALOG_MAX          0xFF
+#define     ANALOG_MAX          50
+#define     ANALOG_SLOW         25
 
 
 /* 模式标志:

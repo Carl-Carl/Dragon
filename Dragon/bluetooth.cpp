@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-11 09:07:03
- * @LastEditTime: 2020-10-11 15:39:13
+ * @LastEditTime: 2020-10-12 08:25:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\bluetooth.cpp
@@ -41,6 +41,6 @@ bluetooth::bluetooth()
 {
     Modes = REMOTE_FLAG;
     Serial.begin(9600);
+    Serial.println("bluetooth OK");
     Timer1.attachInterrupt(signal, 50000);  // 50ms 检查一次命令
 }
-

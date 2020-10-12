@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 11:16:31
- * @LastEditTime: 2020-10-11 15:32:36
+ * @LastEditTime: 2020-10-12 08:24:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Dragon.ino
@@ -16,7 +16,7 @@
  * TEST 为1时，表示测试模式；TEST为0时，表示正式模式
  * 测试模式和正式模式的唯一区别在于loop()函数
  */
-#define TEST 0
+#define TEST 1
 
 /*
  * 模式标志
@@ -30,7 +30,8 @@ orders Order;
 
 /******************** Initialization ********************/
 motor motor_control(LEFT_E, RIGHT_E, LEFT_1, LEFT_2, RIGHT_1, RIGHT_2);
-remote remote_mode(motor_control);
+// bluetooth bluetooth_mode();
+// remote remote_mode(motor_control);
 voice voice_mode(motor_control, VOICE_SEND_PIN, FRONT_PIN, LEFT_PIN, RIGHT_PIN);
 /********************************************************/
 
@@ -39,25 +40,20 @@ voice voice_mode(motor_control, VOICE_SEND_PIN, FRONT_PIN, LEFT_PIN, RIGHT_PIN);
  */
 void setup ()
 {
+#if TEST
     Serial.begin(9600);
-    Modes = REMOTE_FLAG;
+    Serial.println("setup OK");
+#endif
+
+    Modes = VOICE_FLAG;
 }
 
 
 #if TEST    // 测试模式
 void loop()
 {
-    voice_mode.get_dist(v_dist_info);
-    Serial.print("front: ");
-    Serial.println(v_dist_info.front);
-
-    Serial.print("left: ");
-    Serial.println(v_dist_info.left);
-
-    Serial.print("right: ");
-    Serial.println(v_dist_info.right);
-    Serial.println("");
-    delay(2000);
+    Serial.println("loop OK");
+    voice_mode.mode();
 }
 
 #else   // 正式模式

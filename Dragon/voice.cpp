@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-11 15:24:32
+ * @LastEditTime: 2020-10-12 08:21:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -22,6 +22,8 @@ voice::voice(motor &_control, u8 _send_pin, u8 _front_pin, u8 _left_pin, u8 _rig
     pinMode(front_pin, INPUT);
     pinMode(left_pin, INPUT);
     pinMode(right_pin, INPUT);
+
+    Serial.println("voice OK");
 }
 
 void voice::get_dist(DIST_INFO &distance)
@@ -38,7 +40,7 @@ void voice::get_dist(DIST_INFO &distance)
             delayMicroseconds(10);
             digitalWrite(send_pin, LOW);
 
-            temp[j] = pulseIn(ports[i], HIGH, 180000)/59;
+            temp[j] = pulseIn(ports[i], HIGH, 10000)/59;
         }
 
         // sort and get the average
@@ -60,18 +62,35 @@ void voice::mode()
         get_dist(distance);
         int lr = distance.left - distance.right;
 
-        // control the motor
-        if (distance.left > 30 && distance.right > 30) {
-            control.forward();
-        } else if (lr >= 5) {
-            control.turn_left();
-        } else if (lr <= -5) {
-            control.turn_right();
-        } else {
-            control.forward();
+        Serial.print("front: ");
+        Serial.println(distance.front);
+        Serial.print("left: ");
+        Serial.println(distance.left);
+        Serial.print("right: ");
+        Serial.println(distance.right);
+        Serial.println();
+
+        // 紧急后退，避免撞击
+        if (distance.front < 5) {
+            control.backward();
+            delay(300);
+            continue;
         }
 
-        delay(50);
+        // control the motor
+        u8 speed = (distance.front > 15) ? ANALOG_MAX : ANALOG_SLOW;  // 判断：弯道 或 直道
+
+        if (distance.left > 30 && distance.right > 30) {
+            control.forward(speed);
+        } else if (lr >= 3) {
+            control.turn_left(speed);
+        } else if (lr <= -3) {
+            control.turn_right(speed);
+        } else {
+            control.forward(speed);
+        }
+
+        delay(40);
     }
 
     control.brake();
