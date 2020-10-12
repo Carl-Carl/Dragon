@@ -1,20 +1,32 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:45:26
- * @LastEditTime: 2020-10-12 08:26:35
+ * @LastEditTime: 2020-10-12 15:46:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\remote.cpp
  */
 #include "remote.h"
 
-remote::remote(motor &_control) : control(_control)
+remote::remote(motor &_control, u8 _shoot_pin) : control(_control), shoot_pin(_shoot_pin)
 {
     Order = wait;
+    pinMode(shoot_pin, OUTPUT);
+    digitalWrite(shoot_pin, LOW);
+}
+
+void remote::fire()
+{
+    digitalWrite(shoot_pin, HIGH);
+    delay(100);
+    digitalWrite(shoot_pin, LOW);
 }
 
 void remote::mode()
 {
+    Order = wait;
+    digitalWrite(shoot_pin, LOW);
+    
     while (Modes == REMOTE_FLAG) {
         switch (Order) {
         case forward:
@@ -36,12 +48,12 @@ void remote::mode()
         case brake:
             control.brake();
             break;
-        }
 
-        Order = wait;
+        case shoot:
+            fire();
+            break;
+        }
+        
         delay(50);
     }
-
-    control.brake();
-    delay(50);
 } 

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-12 08:21:40
+ * @LastEditTime: 2020-10-12 10:15:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -92,7 +92,4 @@ void voice::mode()
 
         delay(40);
     }
-
-    control.brake();
-    delay(50);
 }
