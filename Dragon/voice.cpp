@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-13 08:29:18
+ * @LastEditTime: 2020-10-13 08:38:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -62,26 +62,31 @@ void voice::mode()
         // get distance information
         DIST_INFO distance;
         get_dist(distance);
+
         double lr = (double)distance.left / distance.right;
+        u16 front = distance.front / time_change;
+        u16 left = distance.left / time_change;
+        u16 right = distance.right / time_change;
 
         Serial.print("front: ");
-        Serial.println(distance.front);
+        Serial.println(front);
         Serial.print("left: ");
-        Serial.println(distance.left);
+        Serial.println(left);
         Serial.print("right: ");
-        Serial.println(distance.right);
+        Serial.println(right);
         Serial.println();
 
+        u8 speed =  ANALOG_MAX;
+
         // 紧急后退，避免撞击
-        if (distance.front/time_change < 5) {
+        if (front/time_change < 5) {
             control.backward();
             delay(400);
             continue;
-        } else if (distance.front/time_change < 15) {   // 大转弯
-
-        } else {
-            u8 speed = (distance.front > 40) ? ANALOG_MAX : ANALOG_SLOW;  // 判断：弯道 或 直道
-
+        } else if (front/time_change < 15) {   // 大转弯
+            control.turn_left(speed);
+            delay(500);
+        } else {    // 直行
             if (distance.left > 30 && distance.right > 30) {
                 control.forward(speed, speed);
             } else if (lr >= 3) {

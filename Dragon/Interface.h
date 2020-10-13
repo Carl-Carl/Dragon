@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-12 15:45:28
+ * @LastEditTime: 2020-10-13 08:33:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -25,12 +25,12 @@
 #define     RIGHT_PIN           5
 
 /* Infrared pins */
-#define     R_1                 0
-#define     R_2                 1
-#define     R_3                 2
-#define     R_4                 3
-#define     R_5                 4
-#define     R_6                 5
+#define     R_1                 A0
+#define     R_2                 A1
+#define     R_3                 A2
+#define     R_4                 A3
+#define     R_5                 A4
+#define     R_6                 A5
 #define     R_7                 6
 #define     R_8                 7
 
