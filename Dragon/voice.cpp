@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-12 08:21:40
+ * @LastEditTime: 2020-10-12 10:15:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -73,7 +73,7 @@ void voice::mode()
         // 紧急后退，避免撞击
         if (distance.front < 5) {
             control.backward();
-            delay(300);
+            delay(400);
             continue;
         }
 
@@ -93,10 +93,10 @@ void voice::mode()
             control.forward(speed);
             
         }
+<<<<<<< HEAD
 
         delay(200);
+=======
+>>>>>>> ae28b63b02e9127af43485a0b3944754eb4ade03
     }
-
-    control.brake();
-    delay(50);
 }

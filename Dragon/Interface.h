@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-12 08:16:42
+ * @LastEditTime: 2020-10-12 15:45:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -35,6 +35,7 @@
 #define     R_8                 7
 
 /* Motor pins */
+#define     SHOOT               2
 #define     LEFT_E              10
 #define     LEFT_1              8
 #define     LEFT_2              9
@@ -47,8 +48,13 @@
 #define     BRX                 1
 
 /* 模拟输出最大值 */
+<<<<<<< HEAD
 #define     ANALOG_MAX          50
 #define     ANALOG_SLOW         20
+=======
+#define     ANALOG_MAX          70
+#define     ANALOG_SLOW         60
+>>>>>>> ae28b63b02e9127af43485a0b3944754eb4ade03
 
 
 /* 模式标志:
@@ -68,7 +74,8 @@ enum MODE_FLAG {
  * 2 : backward 
  * 3 : left
  * 4 : right
- * 5 : break;
+ * 5 : break
+ * 6 : shoot
  */
 enum orders {
     wait        =   0,
@@ -77,9 +84,10 @@ enum orders {
     left        =   3,
     right       =   4,
     brake       =   5,
+    shoot       =   6,
 };
 
 extern orders Order;
 extern MODE_FLAG Modes;
 
-#endif // !DRAGON
+#endif
