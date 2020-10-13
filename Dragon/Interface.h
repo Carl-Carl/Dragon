@@ -25,12 +25,12 @@
 #define     RIGHT_PIN           5
 
 /* Infrared pins */
-#define     R_1                 0
-#define     R_2                 1
-#define     R_3                 2
-#define     R_4                 3
-#define     R_5                 4
-#define     R_6                 5
+#define     R_1                 A0
+#define     R_2                 A1
+#define     R_3                 A2
+#define     R_4                 A3
+#define     R_5                 A4
+#define     R_6                 A5
 #define     R_7                 6
 #define     R_8                 7
 
@@ -48,7 +48,7 @@
 
 /* 模拟输出最大值 */
 #define     ANALOG_MAX          50
-#define     ANALOG_SLOW         25
+#define     ANALOG_SLOW         20
 
 
 /* 模式标志:

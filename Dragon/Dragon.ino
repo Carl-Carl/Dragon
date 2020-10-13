@@ -11,6 +11,8 @@
 #include "motor.h"
 #include "bluetooth.h"
 #include "remote.h"
+#include "Infrared.h"
+
 
 /* 
  * TEST 为1时，表示测试模式；TEST为0时，表示正式模式
@@ -33,6 +35,7 @@ motor motor_control(LEFT_E, RIGHT_E, LEFT_1, LEFT_2, RIGHT_1, RIGHT_2);
 // bluetooth bluetooth_mode();
 // remote remote_mode(motor_control);
 voice voice_mode(motor_control, VOICE_SEND_PIN, FRONT_PIN, LEFT_PIN, RIGHT_PIN);
+Infrared infrared_mode(motor_control, R_1, R_2, R_3, R_4, R_5, R_6, R_7, R_8);
 /********************************************************/
 
 /*
@@ -45,7 +48,7 @@ void setup ()
     Serial.println("setup OK");
 #endif
 
-    Modes = VOICE_FLAG;
+    Modes = INFRARED_FLAG;
 }
 
 
@@ -53,7 +56,8 @@ void setup ()
 void loop()
 {
     Serial.println("loop OK");
-    voice_mode.mode();
+    infrared_mode.mode();
+    
 }
 
 #else   // 正式模式

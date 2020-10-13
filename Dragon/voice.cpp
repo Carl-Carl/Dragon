@@ -78,19 +78,23 @@ void voice::mode()
         }
 
         // control the motor
-        u8 speed = (distance.front > 15) ? ANALOG_MAX : ANALOG_SLOW;  // 判断：弯道 或 直道
+        u8 speed = (distance.front > 40) ? ANALOG_MAX : ANALOG_SLOW;  // 判断：弯道 或 直道
 
         if (distance.left > 30 && distance.right > 30) {
             control.forward(speed);
+            
         } else if (lr >= 3) {
             control.turn_left(speed);
+            
         } else if (lr <= -3) {
             control.turn_right(speed);
+            
         } else {
             control.forward(speed);
+            
         }
 
-        delay(40);
+        delay(200);
     }
 
     control.brake();
