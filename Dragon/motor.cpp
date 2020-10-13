@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-10 12:26:44
- * @LastEditTime: 2020-10-12 10:13:59
+ * @LastEditTime: 2020-10-13 07:55:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\motor.cpp
@@ -25,10 +25,10 @@ void motor::wait()
     analogWrite(re, 0);
 }
 
-void motor::forward(u8 speed)
+void motor::forward(u8 l_speed, u8 r_speed)
 {
-    analogWrite(le, speed);
-    analogWrite(re, speed);
+    analogWrite(le, l_speed);
+    analogWrite(re, r_speed);
     digitalWrite(l1, LOW);
     digitalWrite(l2, HIGH);
     digitalWrite(r1, LOW);

@@ -31,7 +31,7 @@ void remote::mode()
         switch (Order) {
         case forward:
             Serial.println("forward");
-            control.forward(ANALOG_MAX);
+            control.forward(ANALOG_MAX, ANALOG_MAX);
             break;
 
         case backward:

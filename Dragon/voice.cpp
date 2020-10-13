@@ -1,13 +1,15 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-12 10:15:54
+ * @LastEditTime: 2020-10-13 08:29:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
  */
 #include "voice.h"
 #include <stdlib.h>
+
+const int time_change = 59;
 
 voice::voice(motor &_control, u8 _send_pin, u8 _front_pin, u8 _left_pin, u8 _right_pin) : control(_control)
 {
@@ -40,7 +42,7 @@ void voice::get_dist(DIST_INFO &distance)
             delayMicroseconds(10);
             digitalWrite(send_pin, LOW);
 
-            temp[j] = pulseIn(ports[i], HIGH, 10000)/59;
+            temp[j] = pulseIn(ports[i], HIGH, 10000);
         }
 
         // sort and get the average
@@ -60,7 +62,7 @@ void voice::mode()
         // get distance information
         DIST_INFO distance;
         get_dist(distance);
-        int lr = distance.left - distance.right;
+        double lr = (double)distance.left / distance.right;
 
         Serial.print("front: ");
         Serial.println(distance.front);
@@ -71,23 +73,25 @@ void voice::mode()
         Serial.println();
 
         // 紧急后退，避免撞击
-        if (distance.front < 5) {
+        if (distance.front/time_change < 5) {
             control.backward();
             delay(400);
             continue;
-        }
+        } else if (distance.front/time_change < 15) {   // 大转弯
 
-        // control the motor
-        u8 speed = (distance.front > 40) ? ANALOG_MAX : ANALOG_SLOW;  // 判断：弯道 或 直道
-
-        if (distance.left > 30 && distance.right > 30) {
-            control.forward(speed);
-        } else if (lr >= 3) {
-            control.turn_left(speed);
-        } else if (lr <= -3) {
-            control.turn_right(speed);
         } else {
-            control.forward(speed);
+            u8 speed = (distance.front > 40) ? ANALOG_MAX : ANALOG_SLOW;  // 判断：弯道 或 直道
+
+            if (distance.left > 30 && distance.right > 30) {
+                control.forward(speed, speed);
+            } else if (lr >= 3) {
+                control.turn_left(speed);
+            } else if (lr <= -3) {
+                control.turn_right(speed);
+            } else {
+                control.forward(speed, speed);
+            }
         }
+        
     }
 }
