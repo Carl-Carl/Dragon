@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-13 08:38:38
+ * @LastEditTime: 2020-10-13 08:48:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -79,20 +79,24 @@ void voice::mode()
         u8 speed =  ANALOG_MAX;
 
         // 紧急后退，避免撞击
-        if (front/time_change < 5) {
+        if (front / time_change < 5) {
             control.backward();
             delay(400);
             continue;
-        } else if (front/time_change < 15) {   // 大转弯
-            control.turn_left(speed);
+        } else if (front / time_change < 15) {   // 大转弯
+            if (lr > 1)
+                control.turn_left(speed);
+            else
+                control.turn_right(speed);
+
             delay(500);
         } else {    // 直行
-            if (distance.left > 30 && distance.right > 30) {
+            if (left > 30 && right > 30) {
                 control.forward(speed, speed);
-            } else if (lr >= 3) {
-                control.turn_left(speed);
-            } else if (lr <= -3) {
-                control.turn_right(speed);
+            } else if (lr >= 1.1) {
+                control.forward(speed, speed*lr);
+            } else if (lr <= 0.9) {
+                control.forward(speed/lr, speed);
             } else {
                 control.forward(speed, speed);
             }
