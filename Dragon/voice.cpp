@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-13 08:48:07
+ * @LastEditTime: 2020-10-14 08:52:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -77,13 +77,19 @@ void voice::mode()
         Serial.println();
 
         u8 speed =  ANALOG_MAX;
+        lr = lr > 1.5 ? 1.5 : lr;
+        lr = lr < 0.67 ? 0.67 : lr;
 
         // 紧急后退，避免撞击
-        if (front / time_change < 5) {
+        if (front < 5) {
+            control.brake();
+            delay(200);
             control.backward();
             delay(400);
             continue;
-        } else if (front / time_change < 15) {   // 大转弯
+        } else if (front < 15) {   // 大转弯
+            control.brake();
+                delay(100);
             if (lr > 1)
                 control.turn_left(speed);
             else
@@ -94,9 +100,9 @@ void voice::mode()
             if (left > 30 && right > 30) {
                 control.forward(speed, speed);
             } else if (lr >= 1.1) {
-                control.forward(speed, speed*lr);
-            } else if (lr <= 0.9) {
                 control.forward(speed/lr, speed);
+            } else if (lr <= 0.9) {
+                control.forward(speed, speed*lr);
             } else {
                 control.forward(speed, speed);
             }
