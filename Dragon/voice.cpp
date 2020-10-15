@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-14 08:52:09
+ * @LastEditTime: 2020-10-15 21:17:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -36,7 +36,7 @@ void voice::get_dist(DIST_INFO &distance)
 
     for (u8 i = 0; i < 3; ++i) {
         // 取平均值
-        for (u8 j = 0; j < 8; ++j) {
+        for (u8 j = 0; j < 6; ++j) {
             // send begin order
             digitalWrite(send_pin, HIGH);
             delayMicroseconds(10);
@@ -46,10 +46,10 @@ void voice::get_dist(DIST_INFO &distance)
         }
 
         // sort and get the average
-        qsort(temp, 8, sizeof(u16), [](const void *a, const void *b) { return (int)(*(int*)a < *(int*)b); });
+        qsort(temp, 6, sizeof(u16), [](const void *a, const void *b) { return (int)(*(int*)a < *(int*)b); });
         
         *a[i] = 0;
-        for (u8 j = 2; j < 6; ++j)
+        for (u8 j = 1; j < 5; ++j)
             *a[i] += temp[j];
         
         *a[i] >>= 2;

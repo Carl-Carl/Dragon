@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-13 08:33:20
+ * @LastEditTime: 2020-10-15 21:50:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -22,7 +22,7 @@
 #define     VOICE_SEND_PIN      2 // 发射引脚
 #define     FRONT_PIN           3
 #define     LEFT_PIN            4
-#define     RIGHT_PIN           5
+#define     RIGHT_PIN           11
 
 /* Infrared pins */
 #define     R_1                 A0
@@ -31,8 +31,8 @@
 #define     R_4                 A3
 #define     R_5                 A4
 #define     R_6                 A5
-#define     R_7                 6
-#define     R_8                 7
+#define     R_7                 7
+#define     R_8                 10
 
 /* Motor pins */
 #define     SHOOT               2
@@ -48,7 +48,7 @@
 #define     BRX                 1
 
 /* 模拟输出最大值 */
-#define     ANALOG_MAX          70
+#define     ANALOG_MAX          100
 #define     ANALOG_SLOW         60
 
 
