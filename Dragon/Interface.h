@@ -36,10 +36,10 @@
 
 /* Motor pins */
 #define     SHOOT               2
-#define     LEFT_E              10
+#define     LEFT_E              5
 #define     LEFT_1              8
 #define     LEFT_2              9
-#define     RIGHT_E             11
+#define     RIGHT_E             6
 #define     RIGHT_1             12
 #define     RIGHT_2             13
 

@@ -1,3 +1,12 @@
+/*
+ * @Author: your name
+ * @Date: 2020-10-13 08:29:55
+ * @LastEditTime: 2020-10-14 19:34:03
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Dragon\Infrared.cpp
+ */
+
 #include <stdlib.h>
 #include "Infrared.h"
 
@@ -50,25 +59,25 @@ void Infrared::mode()
             if(signal.right[i] == HIGH) rightsum += 1;
         }
 
-        Serial.println(leftsum);
-        Serial.println(rightsum);
+        // Serial.println(leftsum);
+        // Serial.println(rightsum);
 
         if(leftsum > rightsum)
         {
-            control.forward(70, 60);
-            Serial.println("turn right\n");
+            control.forward(55, 20);
+            // Serial.println("turn right\n");
         }
 
         if(leftsum == rightsum)
         {
             control.forward(60, 60);
-            Serial.println("go forward\n");
+            // Serial.println("go forward\n");
         }
 
         if(rightsum > leftsum)
         {
-            control.forward(60, 70);
-            Serial.println("turn left\n");
+            control.forward(20, 55);
+            // Serial.println("turn left\n");
         }
     }
 

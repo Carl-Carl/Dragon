@@ -31,31 +31,31 @@ void remote::mode()
         switch (Order) {
         case forward:
             Serial.println("forward");
-            control.forward(ANALOG_MAX, ANALOG_MAX);
+            control.forward(100, 100);
             break;
 
         case backward:
-            Serial.println("backward");
+//            Serial.println("backward");
             control.backward();
             break;
 
         case left:
-            Serial.println("left");
+//            Serial.println("left");
             control.turn_left(ANALOG_MAX);
             break;
 
         case right:
-            Serial.println("right");
+//            Serial.println("right");
             control.turn_right(ANALOG_MAX);
             break;
 
         case brake:
-            Serial.println("brake");
+//            Serial.println("brake");
             control.brake();
             break;
 
         case shoot:
-            Serial.println("shoot");
+//            Serial.println("shoot");
             fire();
             break;
         }
