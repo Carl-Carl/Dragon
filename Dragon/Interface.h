@@ -35,7 +35,7 @@
 #define     R_8                 7
 
 /* Motor pins */
-#define     SHOOT               2
+#define     SHOOT               11
 #define     LEFT_E              5
 #define     LEFT_1              8
 #define     LEFT_2              9
@@ -48,8 +48,8 @@
 #define     BRX                 1
 
 /* 模拟输出最大值 */
-#define     ANALOG_MAX          70
-#define     ANALOG_SLOW         60
+#define     ANALOG_MAX          130
+#define     ANALOG_SLOW         100
 
 
 /* 模式标志:

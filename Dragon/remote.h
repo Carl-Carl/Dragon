@@ -11,11 +11,13 @@
 
 #include "motor.h"
 #include "Interface.h"
+#include "Servo.h"
 
 class remote
 {
     motor &control;
     u8 shoot_pin;
+    Servo shootgun;
     void fire();
     
 public:
@@ -23,6 +25,8 @@ public:
     // 启动遥控模式
     void mode();
 };
+
+
 
 
 

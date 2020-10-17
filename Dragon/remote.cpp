@@ -7,19 +7,19 @@
  * @FilePath: \Dragon\remote.cpp
  */
 #include "remote.h"
+#include "Servo.h"
 
 remote::remote(motor &_control, u8 _shoot_pin) : control(_control), shoot_pin(_shoot_pin)
 {
     Order = wait;
-    pinMode(shoot_pin, OUTPUT);
-    digitalWrite(shoot_pin, LOW);
+    shootgun.attach(shoot_pin);
 }
 
 void remote::fire()
 {
-    digitalWrite(shoot_pin, HIGH);
-    delay(100);
-    digitalWrite(shoot_pin, LOW);
+    shootgun.write(90);
+    delay(200);
+    shootgun.write(0);
 }
 
 void remote::mode()
@@ -31,7 +31,7 @@ void remote::mode()
         switch (Order) {
         case forward:
             Serial.println("forward");
-            control.forward(100, 100);
+            control.forward(150, 150);
             break;
 
         case backward:
