@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-15 21:50:37
+ * @LastEditTime: 2020-10-17 09:14:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -36,10 +36,10 @@
 
 /* Motor pins */
 #define     SHOOT               2
-#define     LEFT_E              5
+#define     LEFT_E              5   // static
 #define     LEFT_1              8
 #define     LEFT_2              9
-#define     RIGHT_E             6
+#define     RIGHT_E             6   // static
 #define     RIGHT_1             12
 #define     RIGHT_2             13
 

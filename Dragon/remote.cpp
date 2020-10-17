@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:45:26
- * @LastEditTime: 2020-10-12 19:18:39
+ * @LastEditTime: 2020-10-17 09:11:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\remote.cpp
@@ -30,36 +30,31 @@ void remote::mode()
     while (Modes == REMOTE_FLAG) {
         switch (Order) {
         case forward:
-            Serial.println("forward");
             control.forward(ANALOG_MAX, ANALOG_MAX);
             break;
 
         case backward:
-//            Serial.println("backward");
             control.backward();
             break;
 
         case left:
-//            Serial.println("left");
             control.turn_left(ANALOG_MAX);
             break;
 
         case right:
-//            Serial.println("right");
             control.turn_right(ANALOG_MAX);
             break;
 
         case brake:
-//            Serial.println("brake");
             control.brake();
             break;
 
         case shoot:
-//            Serial.println("shoot");
             fire();
             break;
         }
         
-        delay(50);
+        Order = wait;
+        delay(40);
     }
 } 
