@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-17 09:03:35
+ * @LastEditTime: 2020-10-17 20:45:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -75,42 +75,42 @@ void voice::mode()
         get_dist(distance);
 
         double lr = (double)distance.left / distance.right;
-        u16 front = distance.front / time_change;
-        u16 left = distance.left / time_change;
-        u16 right = distance.right / time_change;
+        u16 front = front == 0 ? 100 : distance.front / time_change;
+        u16 left = left == 0 ? 100 : distance.left / time_change;
+        u16 right = right == 0 ? 100 : distance.right / time_change;
 
-        u8 speed =  ANALOG_MAX;
+        if (front == 0) {
+            front = 100;
+        }
+
+        u8 speed =  front >= 20 ? ANALOG_MAX : ANALOG_SLOW;
         lr = lr > 1.5 ? 1.5 : lr;
         lr = lr < 0.67 ? 0.67 : lr;
 
-        // 紧急后退，避免撞击
-        if (front <= 5) {
-            control.brake();
-            delay(100);
-            control.backward();
-            delay(400);
-            continue;
-        } else if (front <= 15) {   // 大转弯
-            control.brake();
-            delay(200);
+//        Serial.println(front);
+//        Serial.println(left);
+//        Serial.println(right);
+//        Serial.println();
 
+        // 紧急后退，避免撞击
+        if (front <= 10) {   // 大转弯
             if (lr > 1)
                 control.turn_left(speed);
             else
                 control.turn_right(speed);
 
-            while (get_dis_front()/time_change <= 25);  // 等待前方空间足够大
+            while (get_dis_front()/time_change <= 15);  // 等待前方空间足够大
 
         } else {    
-            if (left > 40 || right > 40) {      // 弯道直行
+//            if (left > 40 || right > 40) {      // 弯道直行
+//                control.forward(speed, speed);
+//            } else if (lr >= 1.1) {
+//                control.forward(speed - 10, speed);
+//            } else if (lr <= 0.9) {
+//                control.forward(speed, speed - 10);
+//            } else {
                 control.forward(speed, speed);
-            } else if (lr >= 1.1) {
-                control.forward(speed/lr, speed);
-            } else if (lr <= 0.9) {
-                control.forward(speed, speed*lr);
-            } else {
-                control.forward(speed, speed);
-            }
+//            }
         }
     }
 }
