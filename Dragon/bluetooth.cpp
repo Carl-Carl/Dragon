@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-11 09:07:03
- * @LastEditTime: 2020-10-14 18:57:56
+ * @LastEditTime: 2020-10-17 08:32:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\bluetooth.cpp
@@ -13,16 +13,13 @@
  */
 static void signal()
 {
-//  
-  
-    if (Serial.available()) {
+    char ch = Serial.read();
 
-        char ch = Serial.read();
-        if (0 <= ch && ch <= 6) {
-            Order = (orders)ch;
-            delay(5000);
-            Serial.println(ch);
-        }
+    if (ch != EOF) {
+        if ('0' <= ch <= '6' && Modes == REMOTE_FLAG)
+            Order = (orders)(ch - '0');
+        else if ('7' <= ch && ch <= '9')
+            Modes = (MODE_FLAG)(ch - '7');
 
         while (Serial.read() != EOF);
     }

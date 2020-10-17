@@ -47,7 +47,7 @@ void setup ()
 #if TEST
     bluetooth_mode = new bluetooth(9600);
 
-    Modes = REMOTE_FLAG;
+    Modes = INFRARED_FLAG;
 #else
     Modes = REMOTE_FLAG;
 #endif
@@ -58,7 +58,7 @@ void setup ()
 #if TEST    // 测试模式
 void loop()
 {   Serial.println("loop");
-    remote_mode.mode();
+    infrared_mode.mode();
 }
 
 #else   // 正式模式
