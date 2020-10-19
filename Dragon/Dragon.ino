@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 11:16:31
- * @LastEditTime: 2020-10-17 21:35:29
+ * @LastEditTime: 2020-10-19 08:06:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Dragon.ino
@@ -9,7 +9,7 @@
 
 #include "voice.h"
 #include "motor.h"
-#include "bluetooth.h"
+#include "TimerOne.h"
 #include "remote.h"
 #include "Infrared.h"
 
@@ -32,11 +32,11 @@ orders Order;
 /*
  * Initialization
  */
+
 motor motor_control(LEFT_E, RIGHT_E, LEFT_1, LEFT_2, RIGHT_1, RIGHT_2);
 remote remote_mode(motor_control, SHOOT);
-// voice voice_mode(motor_control, VOICE_SEND_PIN, FRONT_PIN, LEFT_PIN, RIGHT_PIN);
-// Infrared infrared_mode(motor_control, R_1, R_2, R_3, R_4, R_5, R_6, R_7, R_8);
-bluetooth *bluetooth_mode;
+voice voice_mode(motor_control, VOICE_SEND_PIN, FRONT_PIN, LEFT_PIN, RIGHT_PIN);
+Infrared infrared_mode(motor_control, R_1, R_2, R_3, R_4, R_5, R_6, R_7, R_8);
 /********************************************************/
 
 /*
@@ -44,12 +44,14 @@ bluetooth *bluetooth_mode;
  */
 void setup ()
 {
+    Serial.begin(9600);
+    delay(10);
+    Timer1.attachInterrupt(signal, 50000);  // 50ms 检查一次命令
 #if TEST
-
-    //sv.attach(11);
-    bluetooth_mode = new bluetooth(9600);
+    
     Modes = REMOTE_FLAG;
 #else
+
     Modes = REMOTE_FLAG;
 #endif
 
@@ -92,3 +94,27 @@ void loop()
 }
 
 #endif
+
+/*
+ * 蓝牙信号接收-中断服务函数
+ */
+static void signal()
+{
+    char ch = Serial.read();
+
+    if (ch != EOF) {
+        if ('0' <= ch <= '6' && Modes == REMOTE_FLAG)
+            Order = (orders)(ch - '0');
+        else if ('7' <= ch && ch <= '9')
+            Modes = (MODE_FLAG)(ch - '7');
+
+        while (Serial.read() != EOF);
+    }
+
+    if (infrared_mode.canStop()) {
+        motor_control.forward(ANALOG_MAX, ANALOG_MAX);
+        delay(800);
+        motor_control.brake();
+        Modes = REMOTE_FLAG;
+    }
+}

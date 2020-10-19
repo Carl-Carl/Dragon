@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:45:26
- * @LastEditTime: 2020-10-17 21:55:43
+ * @LastEditTime: 2020-10-19 08:06:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\remote.cpp
@@ -16,14 +16,13 @@ remote::remote(motor &_control, u8 _shoot_pin) : control(_control), shoot_pin(_s
 
 void remote::fire()
 {
-    for (int i = 0; i <= 60; ++i) {
-      shootgun.write(i);
-      delay(10);
-    }
-    for (int i = 60; i >= 0; --i) {
-      shootgun.write(i);
-      delay(10);
-    }
+
+    shootgun.write(45);
+    delay(500);
+
+    shootgun.write(135);
+    delay(500);
+    
 }
 
 void remote::mode()
@@ -34,32 +33,26 @@ void remote::mode()
     while (Modes == REMOTE_FLAG) {
         switch (Order) {
         case forward:
-            Serial.println("forward");
             control.forward(ANALOG_MAX, ANALOG_MAX);
             break;
 
         case backward:
-//            Serial.println("backward");
             control.backward();
             break;
 
         case left:
-//            Serial.println("left");
             control.turn_left(ANALOG_MAX);
             break;
 
         case right:
-//            Serial.println("right");
             control.turn_right(ANALOG_MAX);
             break;
 
         case brake:
-//            Serial.println("brake");
             control.brake();
             break;
 
         case shoot:
-//            Serial.println("shoot");
             fire();
             break;
         }

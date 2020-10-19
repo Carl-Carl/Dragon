@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-17 20:45:03
+ * @LastEditTime: 2020-10-18 09:19:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -59,11 +59,15 @@ void voice::get_dist(DIST_INFO &distance)
 
 int voice::get_dis_front()
 {
-    digitalWrite(send_pin, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(send_pin, LOW);
+    u16 tot[4];
+    for (u8 i = 0; i < 4; ++i) {
+        digitalWrite(send_pin, HIGH);
+        delayMicroseconds(10);
+        digitalWrite(send_pin, LOW);
+        tot[i] = pulseIn(front_pin, HIGH, 10000);
+    }
 
-    return pulseIn(front_pin, HIGH, 10000);
+    return (tot[1] + tot[2]) >> 1;
 }
 
 
@@ -75,42 +79,34 @@ void voice::mode()
         get_dist(distance);
 
         double lr = (double)distance.left / distance.right;
-        u16 front = front == 0 ? 100 : distance.front / time_change;
-        u16 left = left == 0 ? 100 : distance.left / time_change;
-        u16 right = right == 0 ? 100 : distance.right / time_change;
+        u16 front = (front == 0) ? 100 : distance.front / time_change;
+        u16 left  = (left  == 0) ? 100 : distance.left  / time_change;
+        u16 right = (right == 0) ? 100 : distance.right / time_change;
 
-        if (front == 0) {
-            front = 100;
-        }
-
-        u8 speed =  front >= 20 ? ANALOG_MAX : ANALOG_SLOW;
+        u8 speed = ANALOG_MAX;
         lr = lr > 1.5 ? 1.5 : lr;
         lr = lr < 0.67 ? 0.67 : lr;
 
-//        Serial.println(front);
-//        Serial.println(left);
-//        Serial.println(right);
-//        Serial.println();
+        //Serial.println(front);
+        //Serial.println(left);
+        //Serial.println(right);
+        //Serial.println();
 
         // 紧急后退，避免撞击
-        if (front <= 10) {   // 大转弯
+        if (front <= 13) {   // 大转弯
+            control.brake();
+            delay(100);
+            
             if (lr > 1)
                 control.turn_left(speed);
             else
                 control.turn_right(speed);
 
-            while (get_dis_front()/time_change <= 15);  // 等待前方空间足够大
-
-        } else {    
-//            if (left > 40 || right > 40) {      // 弯道直行
-//                control.forward(speed, speed);
-//            } else if (lr >= 1.1) {
-//                control.forward(speed - 10, speed);
-//            } else if (lr <= 0.9) {
-//                control.forward(speed, speed - 10);
-//            } else {
-                control.forward(speed, speed);
-//            }
-        }
+            while (get_dis_front()/time_change <= 20);  // 等待前方空间足够大
+            
+            control.brake();
+        } else
+            control.forward(speed, speed);
+        
     }
 }
