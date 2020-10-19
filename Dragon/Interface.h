@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-17 20:45:16
+ * @LastEditTime: 2020-10-19 21:21:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -19,10 +19,10 @@
 #include <arduino.h>
 
 /* Voice pins */
-#define     VOICE_SEND_PIN      2 // 发射引脚
-#define     FRONT_PIN           3
-#define     LEFT_PIN            4
-#define     RIGHT_PIN           7
+#define     VOICE_SEND_PIN      3 // 发射引脚
+#define     FRONT_PIN           13
+#define     LEFT_PIN            12
+#define     RIGHT_PIN           11
 
 /* Infrared pins */
 #define     R_1                 A0
@@ -31,17 +31,16 @@
 #define     R_4                 A3
 #define     R_5                 A4
 #define     R_6                 A5
-#define     R_7                 6
-#define     R_8                 7
+
 
 /* Motor pins */
-#define     SHOOT               11
+#define     SHOOT               4
 #define     LEFT_E              5
 #define     LEFT_1              8
-#define     LEFT_2              9
+#define     LEFT_2              7
 #define     RIGHT_E             6
-#define     RIGHT_1             12
-#define     RIGHT_2             13
+#define     RIGHT_1             10
+#define     RIGHT_2             9
 
 /* Bluetooth pins */
 #define     BTX                 0

@@ -1,34 +1,38 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:45:26
- * @LastEditTime: 2020-10-19 08:06:43
+ * @LastEditTime: 2020-10-19 21:07:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\remote.cpp
  */
 #include "remote.h"
+#include "Timerone.h"
 
-remote::remote(motor &_control, u8 _shoot_pin) : control(_control), shoot_pin(_shoot_pin)
+remote::remote(motor &_control, Servo &shoot_gun, void sig()) : control(_control), shootgun(shoot_gun), signal(sig)
 {
     Order = wait;
-    shootgun.attach(shoot_pin);
+    //shootgun.attach(11);
 }
 
 void remote::fire()
 {
-
-    shootgun.write(45);
+    shootgun.attach(11);
+    delay(10);
+    shootgun.write(0);
     delay(500);
 
-    shootgun.write(135);
+    shootgun.write(90);
     delay(500);
     
+    shootgun.write(0);
+    shootgun.detach();
+    Timer1.attachInterrupt(signal, 50000);
 }
 
 void remote::mode()
 {
     Order = wait;
-    digitalWrite(shoot_pin, LOW);
     
     while (Modes == REMOTE_FLAG) {
         switch (Order) {
@@ -56,7 +60,8 @@ void remote::mode()
             fire();
             break;
         }
-        
+
+        Order = wait;
         delay(50);
     }
 } 
