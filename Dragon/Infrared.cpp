@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-13 08:29:55
- * @LastEditTime: 2020-10-14 19:34:03
+ * @LastEditTime: 2020-10-19 09:10:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Infrared.cpp
@@ -84,3 +84,8 @@ void Infrared::mode()
     control.brake();
     delay(50);
 };
+
+bool Infrared::canStop()
+{
+
+}

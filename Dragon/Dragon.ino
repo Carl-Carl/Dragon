@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 11:16:31
- * @LastEditTime: 2020-10-19 08:06:13
+ * @LastEditTime: 2020-10-19 09:00:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Dragon.ino
@@ -30,9 +30,13 @@ MODE_FLAG Modes;
 orders Order;
 
 /*
+ * 启动标志
+ */
+bool start;
+
+/*
  * Initialization
  */
-
 motor motor_control(LEFT_E, RIGHT_E, LEFT_1, LEFT_2, RIGHT_1, RIGHT_2);
 remote remote_mode(motor_control, SHOOT);
 voice voice_mode(motor_control, VOICE_SEND_PIN, FRONT_PIN, LEFT_PIN, RIGHT_PIN);
@@ -47,6 +51,7 @@ void setup ()
     Serial.begin(9600);
     delay(10);
     Timer1.attachInterrupt(signal, 50000);  // 50ms 检查一次命令
+    
 #if TEST
     
     Modes = REMOTE_FLAG;
@@ -74,10 +79,12 @@ void loop()
         break;
 
     case INFRARED_FLAG: // 红外模式
-        ;
+        start = true;
+        infrared_mode.mode();
         break;
 
     case VOICE_FLAG: // 超声波模式
+        start = true;
         voice_mode.mode();
         break;
     };
@@ -111,10 +118,17 @@ static void signal()
         while (Serial.read() != EOF);
     }
 
-    if (infrared_mode.canStop()) {
+    if (Modes != REMOTE_FLAG && infrared_mode.canStop()) {
         motor_control.forward(ANALOG_MAX, ANALOG_MAX);
-        delay(800);
+
+        if (start) {    // 启动时
+            while (infrared_mode.canStop());
+            start = false;
+        } else {        // 停止时
+            delay(800);
+            Modes = REMOTE_FLAG;
+        }
+
         motor_control.brake();
-        Modes = REMOTE_FLAG;
     }
 }
