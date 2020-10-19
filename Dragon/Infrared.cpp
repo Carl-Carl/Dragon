@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include "Infrared.h"
 
-Infrared::Infrared(motor &_control, u8 l_4, u8 l_3, u8 l_2, u8 l_1, u8 r_1, u8 r_2, u8 r_3, u8 r_4):control(_control)
+Infrared::Infrared(motor &_control, u8 l_4, u8 l_3, u8 l_2, u8 l_1, u8 r_1, u8 r_2, u8 r_3, u8 r_4) : control(_control)
 {
     this->left1 = l_1;
     this->left2 = l_2;
@@ -34,7 +34,7 @@ Infrared::Infrared(motor &_control, u8 l_4, u8 l_3, u8 l_2, u8 l_1, u8 r_1, u8 r
 void Infrared::mode()
 {
 
-    while(Modes == INFRARED_FLAG)
+    while (Modes == INFRARED_FLAG)
     {
         Infrared_Info signal;
         signal.left[0] = digitalRead(left1);
@@ -45,36 +45,38 @@ void Infrared::mode()
         signal.right[1] = digitalRead(right2);
         signal.right[2] = digitalRead(right3);
         signal.right[3] = digitalRead(right4);
-        
-        if(signal.left[0] == HIGH && signal.left[1] == HIGH && signal.right[0] == HIGH && signal.right[1] == HIGH)
+
+        if (signal.left[0] == HIGH && signal.left[1] == HIGH && signal.right[0] == HIGH && signal.right[1] == HIGH)
         {
             control.forward(60, 60);
             Serial.println("go forward\n");
         }
 
         u8 leftsum = 0, rightsum = 0;
-        for(u8 i = 0; i < 4 ; i++)
+        for (u8 i = 0; i < 4; i++)
         {
-            if(signal.left[i] == HIGH) leftsum += 1;
-            if(signal.right[i] == HIGH) rightsum += 1;
+            if (signal.left[i] == HIGH)
+                leftsum += 1;
+            if (signal.right[i] == HIGH)
+                rightsum += 1;
         }
 
         // Serial.println(leftsum);
         // Serial.println(rightsum);
 
-        if(leftsum > rightsum)
+        if (leftsum > rightsum)
         {
             control.forward(55, 20);
             // Serial.println("turn right\n");
         }
 
-        if(leftsum == rightsum)
+        if (leftsum == rightsum)
         {
             control.forward(60, 60);
             // Serial.println("go forward\n");
         }
 
-        if(rightsum > leftsum)
+        if (rightsum > leftsum)
         {
             control.forward(20, 55);
             // Serial.println("turn left\n");
@@ -87,5 +89,17 @@ void Infrared::mode()
 
 bool Infrared::canStop()
 {
+    if( digitalRead(left1)== HIGH && 
+        digitalRead(left2)== HIGH && 
+        digitalRead(left3) == HIGH && 
+        digitalRead(left4) == HIGH &&
+        digitalRead(right1)== HIGH &&
+        digitalRead(right2)== HIGH &&
+        digitalRead(right3) == HIGH &&
+        digitalRead(right4) == HIGH)
+    {
+        return true;
+    }
 
+    return false;
 }
