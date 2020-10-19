@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 11:16:31
- * @LastEditTime: 2020-10-19 09:00:30
+ * @LastEditTime: 2020-10-19 16:39:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Dragon.ino
@@ -49,7 +49,6 @@ Infrared infrared_mode(motor_control, R_1, R_2, R_3, R_4, R_5, R_6, R_7, R_8);
 void setup ()
 {
     Serial.begin(9600);
-    delay(10);
     Timer1.attachInterrupt(signal, 50000);  // 50ms 检查一次命令
     
 #if TEST
