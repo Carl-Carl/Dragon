@@ -40,8 +40,6 @@ void Infrared::mode()
         signal.right[0] = digitalRead(right1);
         signal.right[1] = digitalRead(right2);
         signal.right[2] = digitalRead(right3);
-
-        const int SPEED = ANALOG_MAX - 10;
         
         if (signal.left[0] == HIGH && signal.right[0] == HIGH)
         {
@@ -56,23 +54,20 @@ void Infrared::mode()
             if (signal.right[i] == HIGH)
                 rightsum += 1;
         }
-
-        // Serial.println(leftsum);
-        // Serial.println(rightsum);
         if (leftsum == rightsum)
         {
-            control.forward(SPEED, SPEED);
+            control.forward(ANALOG_MAX, ANALOG_MAX);
             // Serial.println("go forward\n");
         } else {
             if (leftsum > rightsum)
             {
-                control.forward(SPEED, SPEED - 40);
+                control.forward(ANALOG_MAX, ANALOG_SLOW);
                 // Serial.println("turn right\n");
             }
 
             if (rightsum > leftsum)
             {
-                control.forward(SPEED - 40 ,SPEED);
+                control.forward(ANALOG_SLOW ,ANALOG_MAX);
                 // Serial.println("turn left\n");
             }
         }
