@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-19 21:21:58
+ * @LastEditTime: 2020-10-20 20:51:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -57,9 +57,9 @@
  * VOICE_FLAG    : 超声波模式
  */
 enum MODE_FLAG {
-    REMOTE_FLAG      =   0,
-    INFRARED_FLAG    =   1,
-    VOICE_FLAG       =   2,
+    REMOTE_FLAG      =   7,
+    INFRARED_FLAG    =   8,
+    VOICE_FLAG       =   9,
 };
 
 /*

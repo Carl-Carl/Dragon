@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 11:16:31
- * @LastEditTime: 2020-10-19 21:19:03
+ * @LastEditTime: 2020-10-20 20:57:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Dragon.ino
@@ -17,7 +17,7 @@
  * TEST 为1时，表示测试模式；TEST为0时，表示正式模式
  * 测试模式和正式模式的唯一区别在于loop()函数
  */
-#define TEST 1
+#define TEST 0
 
 /*
  * 模式标志
@@ -107,10 +107,10 @@ void signal()
     char ch = Serial.read();
 
     if (ch != EOF) {
-        if ('0' <= ch <= '6' && Modes == REMOTE_FLAG)
+        if ('0' <= ch && ch <= '6' && Modes == REMOTE_FLAG)
             Order = (orders)(ch - '0');
         else if ('7' <= ch && ch <= '9')
-            Modes = (MODE_FLAG)(ch - '7');
+            Modes = (MODE_FLAG)(ch - '0');
 
         while (Serial.read() != EOF);
     }

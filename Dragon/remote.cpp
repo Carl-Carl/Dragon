@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:45:26
- * @LastEditTime: 2020-10-19 21:07:16
+ * @LastEditTime: 2020-10-20 20:57:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\remote.cpp
@@ -17,7 +17,7 @@ remote::remote(motor &_control, Servo &shoot_gun, void sig()) : control(_control
 
 void remote::fire()
 {
-    shootgun.attach(11);
+    shootgun.attach(4);
     delay(10);
     shootgun.write(0);
     delay(500);
@@ -37,6 +37,7 @@ void remote::mode()
     while (Modes == REMOTE_FLAG) {
         switch (Order) {
         case forward:
+            Serial.println("for");
             control.forward(ANALOG_MAX, ANALOG_MAX);
             break;
 
