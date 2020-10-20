@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-13 08:29:55
- * @LastEditTime: 2020-10-19 21:40:05
+ * @LastEditTime: 2020-10-20 21:09:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Infrared.cpp
@@ -43,7 +43,7 @@ void Infrared::mode()
         
         if (signal.left[0] == HIGH && signal.right[0] == HIGH)
         {
-            control.forward(SPEED, SPEED);
+            control.forward(ANALOG_MAX, ANALOG_MAX);
         }
 
         u8 leftsum = 0, rightsum = 0;

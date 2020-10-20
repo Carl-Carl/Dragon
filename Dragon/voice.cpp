@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-18 09:19:17
+ * @LastEditTime: 2020-10-20 21:44:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -44,6 +44,7 @@ void voice::get_dist(DIST_INFO &distance)
             digitalWrite(send_pin, LOW);
 
             temp[j] = pulseIn(ports[i], HIGH, 10000);
+            delay(1);
         }
 
         // sort and get the average
@@ -87,26 +88,28 @@ void voice::mode()
         lr = lr > 1.5 ? 1.5 : lr;
         lr = lr < 0.67 ? 0.67 : lr;
 
-        //Serial.println(front);
-        //Serial.println(left);
-        //Serial.println(right);
-        //Serial.println();
+        // Serial.println(front);
+        // Serial.println(left);
+        // Serial.println(right);
+        // Serial.println();
 
         // 紧急后退，避免撞击
-        if (front <= 13) {   // 大转弯
-            control.brake();
-            delay(100);
-            
+        int time;
+        if (front <= 10) {
+            control.backward();
+            time = 200;
+        } else if (front <= 20) {   // 大转弯
             if (lr > 1)
                 control.turn_left(speed);
             else
                 control.turn_right(speed);
 
-            while (get_dis_front()/time_change <= 20);  // 等待前方空间足够大
-            
-            control.brake();
-        } else
+            time = 200;
+        } else {
             control.forward(speed, speed);
+            time = 200;
+        }
         
+        delay(time);
     }
 }

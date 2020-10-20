@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-20 20:51:57
+ * @LastEditTime: 2020-10-20 21:06:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -48,7 +48,7 @@
 
 /* 模拟输出最大值 */
 #define     ANALOG_MAX          80
-#define     ANALOG_SLOW         65
+#define     ANALOG_SLOW         30
 
 
 /* 模式标志:
