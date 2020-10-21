@@ -57,18 +57,33 @@ void Infrared::mode()
         if (leftsum == rightsum)
         {
             control.forward(ANALOG_MAX, ANALOG_MAX);
-            // Serial.println("go forward\n");
-        } else {
-            if (leftsum > rightsum)
+            // go forward
+        } 
+        else 
+        {
+            control.brake();
+            delay(50);
+            if (leftsum - rightsum == 1)
             {
                 control.forward(ANALOG_MAX, ANALOG_SLOW);
-                // Serial.println("turn right\n");
+                // turn right
+            }
+            if(leftsum - rightsum > 1)
+            {
+                control.turn_right(ANALOG_MAX);
+                // turn right
             }
 
-            if (rightsum > leftsum)
+            if(rightsum - leftsum > 1)
+            {
+                control.turn_left(ANALOG_MAX);
+                // turn left
+            }
+
+            if (rightsum - leftsum == 1)
             {
                 control.forward(ANALOG_SLOW ,ANALOG_MAX);
-                // Serial.println("turn left\n");
+                // turn left
             }
         }
     }
