@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-20 21:44:45
+ * @LastEditTime: 2020-10-21 20:43:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -37,21 +37,21 @@ void voice::get_dist(DIST_INFO &distance)
 
     for (u8 i = 0; i < 3; ++i) {
         // 取平均值
-        for (u8 j = 0; j < 6; ++j) {
+        for (u8 j = 0; j < 10; ++j) {
             // send begin order
             digitalWrite(send_pin, HIGH);
             delayMicroseconds(10);
             digitalWrite(send_pin, LOW);
 
-            temp[j] = pulseIn(ports[i], HIGH, 10000);
+            temp[j] = pulseIn(ports[i], HIGH, 15000);
             delay(1);
         }
 
         // sort and get the average
-        qsort(temp, 6, sizeof(u16), [](const void *a, const void *b) { return (int)(*(int*)a < *(int*)b); });
+        qsort(temp, 10, sizeof(u16), [](const void *a, const void *b) { return (int)(*(int*)a < *(int*)b); });
         
         *a[i] = 0;
-        for (u8 j = 1; j < 5; ++j)
+        for (u8 j = 3; j < 7; ++j)
             *a[i] += temp[j];
         
         *a[i] >>= 2;
@@ -65,7 +65,7 @@ int voice::get_dis_front()
         digitalWrite(send_pin, HIGH);
         delayMicroseconds(10);
         digitalWrite(send_pin, LOW);
-        tot[i] = pulseIn(front_pin, HIGH, 10000);
+        tot[i] = pulseIn(front_pin, HIGH, 150000);
     }
 
     return (tot[1] + tot[2]) >> 1;
@@ -97,17 +97,17 @@ void voice::mode()
         int time;
         if (front <= 10) {
             control.backward();
-            time = 200;
+            time = 500;
         } else if (front <= 20) {   // 大转弯
             if (lr > 1)
                 control.turn_left(speed);
             else
                 control.turn_right(speed);
 
-            time = 200;
+            time = 500;
         } else {
             control.forward(speed, speed);
-            time = 200;
+            time = 500;
         }
         
         delay(time);
