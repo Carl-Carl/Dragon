@@ -19,13 +19,12 @@ void remote::fire()
 {
     shootgun.attach(4);
     delay(10);
-    shootgun.write(0);
-    delay(500);
-
+    
     shootgun.write(90);
-    delay(500);
+    delay(170);
     
     shootgun.write(0);
+    delay(170);
     shootgun.detach();
     Timer1.attachInterrupt(signal, 50000);
 }

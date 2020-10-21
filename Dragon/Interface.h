@@ -48,7 +48,7 @@
 
 /* 模拟输出最大值 */
 #define     ANALOG_MAX          80
-#define     ANALOG_SLOW         30
+#define     ANALOG_SLOW         40
 
 
 /* 模式标志:
