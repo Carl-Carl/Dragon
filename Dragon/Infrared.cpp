@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-13 08:29:55
- * @LastEditTime: 2020-10-22 14:46:32
+ * @LastEditTime: 2020-10-22 21:30:12
  * @LastEditors: your name
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Infrared.cpp
@@ -34,31 +34,25 @@ void Infrared::mode()
 
     while (Modes == INFRARED_FLAG)
     {
-        u8 leftsum = 0, rightsum = 0;
 
-        leftsum += digitalRead(left1) + digitalRead(left2) + digitalRead(left3);
-        rightsum += digitalRead(right1)+ digitalRead(right2) + digitalRead(right3);
-        
-        if (leftsum == rightsum)
+        if(digitalRead(left1) && digitalRead(right1))
         {
             control.forward(ANALOG_MAX, ANALOG_MAX);
-            // go forward
-        } 
-        else 
-        {
-            if(rightsum > leftsum )
-            {
-                control.forward(ANALOG_MAX ,ANALOG_SLOW);
-
-                // turn right
-            }
-
-            if (rightsum < leftsum )
-            {
-                control.forward(ANALOG_SLOW ,ANALOG_MAX);
-                // turn left
-            }
         }
+
+        else if(digitalRead(left2) || digitalRead(left3))
+        {
+            control.forward(ANALOG_SLOW, ANALOG_MAX);
+        }
+
+        else if(digitalRead(right2) || digitalRead(right3))
+        {
+            control.forward(ANALOG_MAX, ANALOG_SLOW);
+        }
+
+        control.brake();
+        delay(300);
+
     }
     control.brake();
     delay(50);
