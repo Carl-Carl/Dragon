@@ -33,7 +33,7 @@ void voice::get_dist(DIST_INFO &distance)
 {    
     u16 *a[3] = {&distance.front, &distance.left, &distance.right};
     u8 ports[3] = {front_pin, left_pin, right_pin};
-    u16 temp[6];
+    u16 temp[10];
 
     for (u8 i = 0; i < 3; ++i) {
         // 取平均值
@@ -88,10 +88,10 @@ void voice::mode()
         lr = lr > 1.5 ? 1.5 : lr;
         lr = lr < 0.67 ? 0.67 : lr;
 
-        // Serial.println(front);
-        // Serial.println(left);
-        // Serial.println(right);
-        // Serial.println();
+         Serial.println(front);
+         Serial.println(left);
+         Serial.println(right);
+         Serial.println();
 
         // 紧急后退，避免撞击
         int time;
