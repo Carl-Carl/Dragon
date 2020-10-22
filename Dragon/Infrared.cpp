@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-10-13 08:29:55
- * @LastEditTime: 2020-10-22 14:46:32
- * @LastEditors: your name
+ * @LastEditTime: 2020-10-22 21:36:53
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Infrared.cpp
  */
@@ -31,7 +31,6 @@ Infrared::Infrared(motor &_control, u8 l_3, u8 l_2, u8 l_1, u8 r_1, u8 r_2, u8 r
 
 void Infrared::mode()
 {
-
     while (Modes == INFRARED_FLAG)
     {
         u8 leftsum = 0, rightsum = 0;
@@ -62,7 +61,7 @@ void Infrared::mode()
     }
     control.brake();
     delay(50);
-};
+}
 
 bool Infrared::canStop()
 {

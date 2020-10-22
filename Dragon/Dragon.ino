@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 11:16:31
- * @LastEditTime: 2020-10-20 20:57:04
+ * @LastEditTime: 2020-10-22 21:34:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Dragon.ino
@@ -107,7 +107,7 @@ void signal()
     char ch = Serial.read();
 
     if (ch != EOF) {
-        if ('0' <= ch && ch <= '6' && Modes == REMOTE_FLAG)
+        if ('0' <= ch && ch <= '8' && Modes == REMOTE_FLAG)
             Order = (orders)(ch - '0');
         else if ('7' <= ch && ch <= '9')
             Modes = (MODE_FLAG)(ch - '0');

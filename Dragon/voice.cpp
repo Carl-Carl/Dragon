@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-22 08:21:02
+ * @LastEditTime: 2020-10-22 21:30:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -71,6 +71,7 @@ int voice::get_dis_front()
     return (tot[1] + tot[2]) >> 1;
 }
 
+const auto OFF_SET = 0;
 
 void voice::mode()
 {
@@ -84,7 +85,7 @@ void voice::mode()
         u16 left  = (left  == 0) ? 100 : distance.left  / time_change;
         u16 right = (right == 0) ? 100 : distance.right / time_change;
 
-        u8 speed = ANALOG_MAX;
+        u8 speed = ANALOG_MAX + OFF_SET;
         lr = lr > 1.5 ? 1.5 : lr;
         lr = lr < 0.67 ? 0.67 : lr;
 
@@ -98,7 +99,7 @@ void voice::mode()
         if (front <= 10) {
             control.backward();
             time = 500;
-        } else if (front <= 20) {   // 大转弯
+        } else if (front <= 15 || left <= 5 || right <= 5) {   // 大转弯
             if (lr > 1)
                 control.turn_left(speed);
             else
@@ -109,7 +110,7 @@ void voice::mode()
             control.forward(speed, speed);
             time = 500;
         }
-        
+
         delay(time);
         control.brake();
         delay(300);

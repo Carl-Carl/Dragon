@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-20 21:06:32
+ * @LastEditTime: 2020-10-22 21:34:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -79,6 +79,8 @@ enum orders {
     right       =   4,
     brake       =   5,
     shoot       =   6,
+    up          =   7,
+    down        =   8,
 };
 
 extern orders Order;
