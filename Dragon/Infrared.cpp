@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-10-13 08:29:55
- * @LastEditTime: 2020-10-20 21:09:19
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-10-22 14:46:32
+ * @LastEditors: your name
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Infrared.cpp
  */
@@ -12,6 +12,7 @@
 
 Infrared::Infrared(motor &_control, u8 l_3, u8 l_2, u8 l_1, u8 r_1, u8 r_2, u8 r_3) : control(_control)
 {
+    
     this->left1 = l_1;
     this->left2 = l_2;
     this->left3 = l_3;
@@ -19,12 +20,12 @@ Infrared::Infrared(motor &_control, u8 l_3, u8 l_2, u8 l_1, u8 r_1, u8 r_2, u8 r
     this->right2 = r_2;
     this->right3 = r_3;
 
-    pinMode(l_1, INPUT);
-    pinMode(l_2, INPUT);
-    pinMode(l_3, INPUT);
-    pinMode(r_1, INPUT);
-    pinMode(r_2, INPUT);
-    pinMode(r_3, INPUT);
+    pinMode(left1, INPUT);
+    pinMode(left2, INPUT);
+    pinMode(left3, INPUT);
+    pinMode(right1, INPUT);
+    pinMode(right2, INPUT);
+    pinMode(right3, INPUT);
     
 };
 
@@ -33,27 +34,11 @@ void Infrared::mode()
 
     while (Modes == INFRARED_FLAG)
     {
-        Infrared_Info signal;
-        signal.left[0] = digitalRead(left1);
-        signal.left[1] = digitalRead(left2);
-        signal.left[2] = digitalRead(left3);
-        signal.right[0] = digitalRead(right1);
-        signal.right[1] = digitalRead(right2);
-        signal.right[2] = digitalRead(right3);
-        
-        if (signal.left[0] == HIGH && signal.right[0] == HIGH)
-        {
-            control.forward(ANALOG_MAX, ANALOG_MAX);
-        }
-
         u8 leftsum = 0, rightsum = 0;
-        for (u8 i = 0; i < 3; i++)
-        {
-            if (signal.left[i] == HIGH)
-                leftsum += 1;
-            if (signal.right[i] == HIGH)
-                rightsum += 1;
-        }
+
+        leftsum += digitalRead(left1) + digitalRead(left2) + digitalRead(left3);
+        rightsum += digitalRead(right1)+ digitalRead(right2) + digitalRead(right3);
+        
         if (leftsum == rightsum)
         {
             control.forward(ANALOG_MAX, ANALOG_MAX);
@@ -61,34 +46,22 @@ void Infrared::mode()
         } 
         else 
         {
-            control.brake();
-            delay(50);
-            if (leftsum - rightsum == 1)
+            if(rightsum > leftsum )
             {
-                control.forward(ANALOG_MAX, ANALOG_SLOW);
-                // turn right
-            }
-            if(leftsum - rightsum > 1)
-            {
-                control.turn_right(ANALOG_MAX);
+                control.forward(ANALOG_MAX ,ANALOG_SLOW);
+
                 // turn right
             }
 
-            if(rightsum - leftsum > 1)
-            {
-                control.turn_left(ANALOG_MAX);
-                // turn left
-            }
-
-            if (rightsum - leftsum == 1)
+            if (rightsum < leftsum )
             {
                 control.forward(ANALOG_SLOW ,ANALOG_MAX);
                 // turn left
             }
         }
     }
-
     control.brake();
+    delay(50);
 };
 
 bool Infrared::canStop()
