@@ -22,7 +22,7 @@
 #define     VOICE_SEND_PIN      3 // 发射引脚
 #define     FRONT_PIN           13
 #define     LEFT_PIN            12
-#define     RIGHT_PIN           11
+#define     RIGHT_PIN           2
 
 /* Infrared pins */
 #define     R_1                 A0
@@ -47,7 +47,7 @@
 #define     BRX                 1
 
 /* 模拟输出最大值 */
-#define     ANALOG_MAX          80
+#define     ANALOG_MAX          90
 #define     ANALOG_SLOW         30
 
 

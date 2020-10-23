@@ -98,21 +98,21 @@ void voice::mode()
         int time;
         if (front <= 10) {
             control.backward();
-            time = 300;
+            time = 200;
         } else if (front <= 20 || left <= 10 || right <= 10) {   // 大转弯
             if (lr > 1)
                 control.turn_left(speed);
             else
                 control.turn_right(speed);
 
-            time = 300;
+            time = 250;
         } else {
             control.forward(speed, speed);
-            time = 450;
+            time = 300;
         }
 
         delay(time);
         control.brake();
-        delay(200);
+        delay(300);
     }
 }
