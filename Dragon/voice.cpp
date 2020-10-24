@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-22 21:30:45
+ * @LastEditTime: 2020-10-24 20:34:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -30,7 +30,7 @@ voice::voice(motor &_control, u8 _send_pin, u8 _front_pin, u8 _left_pin, u8 _rig
 }
 
 void voice::get_dist(DIST_INFO &distance)
-{    
+{
     u16 *a[3] = {&distance.front, &distance.left, &distance.right};
     u8 ports[3] = {front_pin, left_pin, right_pin};
     u16 temp[10];
@@ -98,17 +98,19 @@ void voice::mode()
         int time;
         if (front <= 10) {
             control.backward();
-            time = 500;
-        } else if (front <= 15 || left <= 5 || right <= 5) {   // 大转弯
+            time = 200;
+        } else if (front <= 20 || left <= 10 || right <= 10) {   // 大转弯
             if (lr > 1)
                 control.turn_left(speed);
             else
                 control.turn_right(speed);
 
-            time = 500;
+            delay(250);
+            control.forward(speed, speed);
+            time = 250;
         } else {
             control.forward(speed, speed);
-            time = 500;
+            time = 300;
         }
 
         delay(time);

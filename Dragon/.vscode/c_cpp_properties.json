@@ -5,10 +5,13 @@
             "includePath": [
                 "D:\\Program Files\\Arduino\\**",
                 "C:\\Users\\xhm2001\\Documents\\Arduino\\libraries\\**",
-                "D:\\Files\\Resource\\Github\\Dragon\\Dragon\\"
+                "D:\\Files\\Resource\\Github\\Dragon\\Dragon\\",
+                "D:\\Program Files\\Arduino\\hardware\\arduino\\avr\\**",
+                "D:\\Program Files\\Arduino\\tools\\**"
             ],
             "forcedInclude": [
-                "D:\\Program Files\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"],
+                "D:\\Program Files\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+            ],
             "defines": [
                 "USBCON"
             ],
