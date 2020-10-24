@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-10-13 08:29:55
- * @LastEditTime: 2020-10-22 21:44:53
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-10-24 21:44:11
+ * @LastEditors: your name
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Infrared.cpp
  */
@@ -33,21 +33,24 @@ void Infrared::mode()
 {
     while (Modes == INFRARED_FLAG)
     {
-       if( digitalRead(left1) && digitalRead(right1) )
-       {
-           control.forward(ANALOG_MAX, ANALOG_MAX);
-       }
-       else if(digitalRead(left2) || digitalRead(left3))
-       {
-           control.forward(ANALOG_SLOW, ANALOG_MAX);
-       }
-       else if(digitalRead(right2) || digitalRead(right3))
-       {
-           control.forward(ANALOG_MAX, ANALOG_SLOW);
-       }
+        if(digitalRead(left1) == HIGH && digitalRead(right1) == HIGH)
+        {
+            control.forward(ANALOG_MAX, ANALOG_MAX);    
+        }
 
-       control.brake();
-       delay(300);
+        u8 leftsum = 0, rightsum = 0;
+        leftsum += digitalRead(left1) + digitalRead(left2) + digitalRead(left3);
+        rightsum += digitalRead(right1) + digitalRead(right2) + digitalRead(right3);
+
+        if(leftsum > rightsum)
+        {
+            control.turn_left(ANALOG_SLOW);
+        }
+
+        if(leftsum < rightsum)
+        {
+            control.turn_right(ANALOG_SLOW);
+        }
     }
     
     control.brake();
@@ -56,12 +59,12 @@ void Infrared::mode()
 
 bool Infrared::canStop()
 {
-    if( digitalRead(left1)== HIGH && 
-        digitalRead(left2)== HIGH && 
-        digitalRead(left3) == HIGH && 
-        digitalRead(right1)== HIGH &&
-        digitalRead(right2)== HIGH &&
-        digitalRead(right3) == HIGH )
+    if( digitalRead(left1) == LOW && 
+        digitalRead(left2) == LOW && 
+        digitalRead(left3) == LOW && 
+        digitalRead(right1) == LOW &&
+        digitalRead(right2) == LOW &&
+        digitalRead(right3) == LOW )
     {
         return true;
     }

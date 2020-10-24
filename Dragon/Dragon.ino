@@ -43,7 +43,7 @@ Servo shootgun;
 motor motor_control(LEFT_E, RIGHT_E, LEFT_1, LEFT_2, RIGHT_1, RIGHT_2);
 remote remote_mode(motor_control, shootgun, signal);
 voice voice_mode(motor_control, VOICE_SEND_PIN, FRONT_PIN, LEFT_PIN, RIGHT_PIN);
-Infrared infrared_mode(motor_control, R_1, R_2, R_3, R_4, R_5, R_6);
+Infrared infrared_mode(motor_control, R_6, R_5, R_4, R_3, R_2, R_1);
 /********************************************************/
 
 
