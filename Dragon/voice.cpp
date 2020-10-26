@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-24 20:34:40
+ * @LastEditTime: 2020-10-26 21:46:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -44,6 +44,10 @@ void voice::get_dist(DIST_INFO &distance)
             digitalWrite(send_pin, LOW);
 
             temp[j] = pulseIn(ports[i], HIGH, 15000);
+
+            if (!temp[j]) {
+                // *******//
+            }
             delay(1);
         }
 
@@ -80,32 +84,34 @@ void voice::mode()
         DIST_INFO distance;
         get_dist(distance);
 
+        u16 front = (distance.front < 50) ? 100 : distance.front / time_change;
+        u16 left  = (distance.left  < 50) ? 100 : distance.left  / time_change;
+        u16 right = (distance.right < 50) ? 100 : distance.right / time_change;
+
         double lr = (double)distance.left / distance.right;
-        u16 front = (front == 0) ? 100 : distance.front / time_change;
-        u16 left  = (left  == 0) ? 100 : distance.left  / time_change;
-        u16 right = (right == 0) ? 100 : distance.right / time_change;
-
         u8 speed = ANALOG_MAX + OFF_SET;
-        lr = lr > 1.5 ? 1.5 : lr;
-        lr = lr < 0.67 ? 0.67 : lr;
+        // lr = lr > 1.5 ? 1.5 : lr;
+        // lr = lr < 0.67 ? 0.67 : lr;
 
-         Serial.println(front);
-         Serial.println(left);
-         Serial.println(right);
-         Serial.println();
+        Serial.println(front);
+        Serial.println(left);
+        Serial.println(right);
+        Serial.println(lr);
+        Serial.println();
 
         // 紧急后退，避免撞击
         int time;
         if (front <= 10) {
             control.backward();
             time = 200;
-        } else if (front <= 20 || left <= 10 || right <= 10) {   // 大转弯
-            if (lr > 1)
-                control.turn_left(speed);
-            else
-                control.turn_right(speed);
-
-            delay(250);
+        } else if (lr >= 2) {   // 大转弯
+            control.turn_left(speed);
+            delay(150);
+            control.forward(speed, speed);
+            time = 250;
+        } else if (lr <= 0.5) {
+            control.turn_right(speed);
+            delay(150);
             control.forward(speed, speed);
             time = 250;
         } else {
