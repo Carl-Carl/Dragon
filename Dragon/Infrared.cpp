@@ -47,12 +47,12 @@ void Infrared::mode()
 
         if(leftsum > rightsum)
         {
-            control.forward(ANALOG_SLOW, ANALOG_MAX); //left
+            control.forward(ANALOG_SLOW - 40, ANALOG_SLOW); //left
         }
 
         if(leftsum < rightsum)
         {
-            control.forward(ANALOG_MAX, ANALOG_SLOW); //right
+            control.forward(ANALOG_SLOW, ANALOG_SLOW - 40); //right
         }
     }
     
