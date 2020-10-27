@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-10-13 08:29:55
- * @LastEditTime: 2020-10-24 21:44:11
- * @LastEditors: your name
+ * @LastEditTime: 2020-10-27 21:08:17
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Infrared.cpp
  */
@@ -31,11 +31,14 @@ Infrared::Infrared(motor &_control, u8 l_3, u8 l_2, u8 l_1, u8 r_1, u8 r_2, u8 r
 
 void Infrared::mode()
 {
-    while (Modes == INFRARED_FLAG)
+    Serial.println("infrared");
+
+    while (Modes == INFRARED_FLAG && (Serial.println(Modes) || 1))
     {
+        Serial.println("ininin");
         if(digitalRead(left1) == HIGH && digitalRead(right1) == HIGH)
         {
-            control.forward(ANALOG_MAX, ANALOG_MAX);    
+            control.forward(ANALOG_MAX, ANALOG_MAX); 
         }
 
         u8 leftsum = 0, rightsum = 0;
@@ -57,7 +60,12 @@ void Infrared::mode()
     delay(50);
 }
 
-bool Infrared::canStop()
+/*
+ * 0: b/w(infrared)
+ * 1: b(stop)
+ * 2: w(voice)
+*/
+int Infrared::canStop()
 {
     if( digitalRead(left1) == LOW && 
         digitalRead(left2) == LOW && 
@@ -66,8 +74,17 @@ bool Infrared::canStop()
         digitalRead(right2) == LOW &&
         digitalRead(right3) == LOW )
     {
-        return true;
+        return 2;
+    }
+    else if( digitalRead(left1) == HIGH && 
+            digitalRead(left2) == HIGH && 
+            digitalRead(left3) == HIGH && 
+            digitalRead(right1) ==HIGH &&
+            digitalRead(right2) == HIGH &&
+            digitalRead(right3) == HIGH )
+    {
+        return 1;
     }
 
-    return false;
+    return 0;    
 }

@@ -1,12 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-26 21:46:17
+ * @LastEditTime: 2020-10-27 21:19:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
  */
 #include "voice.h"
+#include "Infrared.h"
 #include <stdlib.h>
 
 /* Convert Microseconds to cm */
@@ -79,7 +80,10 @@ const auto OFF_SET = 0;
 
 void voice::mode()
 {
-    while (Modes == VOICE_FLAG) {
+    Serial.println("voice");
+
+    static u8 last = 0;
+    while (Modes == VOICE_FLAG && (1 || Serial.println(Modes))) {
         // get distance information
         DIST_INFO distance;
         get_dist(distance);
@@ -104,19 +108,30 @@ void voice::mode()
         if (front <= 10) {
             control.backward();
             time = 200;
-        } else if (lr >= 2) {   // 大转弯
+            last = 0;
+        } else if (lr >= 1.4) {   // 大转弯
             control.turn_left(speed);
             delay(150);
             control.forward(speed, speed);
             time = 250;
-        } else if (lr <= 0.5) {
+            last = 1;
+        } else if (lr <= 0.714) {
             control.turn_right(speed);
             delay(150);
             control.forward(speed, speed);
             time = 250;
+            last = 2;
         } else {
+            if (last == 1) {
+                control.turn_right(speed);
+                delay(100);
+            } else if (last == 2) {
+                control.turn_left(speed);
+                delay(100);
+            }
             control.forward(speed, speed);
             time = 300;
+            last = 0;
         }
 
         delay(time);

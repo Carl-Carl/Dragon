@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 11:16:31
- * @LastEditTime: 2020-10-23 21:31:28
+ * @LastEditTime: 2020-10-27 21:10:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Dragon.ino
@@ -22,7 +22,7 @@
 /*
  * 模式标志
  */
-MODE_FLAG Modes;
+int Modes;
 
 /*
  * 遥控命令标志
@@ -119,8 +119,15 @@ void signal()
         while (Serial.read() != EOF);
     }
 
-
-    // if (Modes != REMOTE_FLAG && infrared_mode.canStop()) {
+    u8 st = infrared_mode.canStop();
+    if (Modes == VOICE_FLAG && st == 0) {
+        Modes = INFRARED_FLAG;
+        Serial.println("to infrared_mode");
+    } else if (Modes == INFRARED_FLAG && st == 2) {
+        Modes = VOICE_FLAG;
+        Serial.println("to voice_mode");
+    }
+    // } else if (Modes != REMOTE_FLAG && st == 1) {
     //     motor_control.forward(ANALOG_MAX, ANALOG_MAX);
 
     //     if (start) {    // 启动时

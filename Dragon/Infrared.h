@@ -1,8 +1,8 @@
 /*
  * @Author: Snowball
  * @Date: 2020-10-13 08:29:55
- * @LastEditTime: 2020-10-22 14:39:16
- * @LastEditors: your name
+ * @LastEditTime: 2020-10-27 20:17:03
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Infrared.h
  */
@@ -27,7 +27,6 @@ class Infrared
 public:
     Infrared(motor &_control,u8 l3, u8 l2, u8 l1, u8 ri, u8 r2, u8 r3);
     void mode();
-    bool canStop();
-
+    int canStop();
 };
 #endif // !INFRARED

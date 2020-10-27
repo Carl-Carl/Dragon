@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-22 21:44:09
+ * @LastEditTime: 2020-10-27 21:03:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -48,7 +48,7 @@
 
 /* 模拟输出最大值 */
 #define     ANALOG_MAX          90
-#define     ANALOG_SLOW         30
+#define     ANALOG_SLOW         60
 
 
 /* 模式标志:
@@ -84,6 +84,6 @@ enum orders {
 };
 
 extern orders Order;
-extern MODE_FLAG Modes;
+extern int Modes;
 
 #endif

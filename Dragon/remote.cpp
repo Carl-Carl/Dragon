@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:45:26
- * @LastEditTime: 2020-10-22 21:37:36
+ * @LastEditTime: 2020-10-27 21:03:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\remote.cpp
@@ -31,12 +31,12 @@ void remote::fire()
 
 static int SPEED = ANALOG_MAX;
 
-
 void remote::mode()
 {
     Order = wait;
+    Serial.println("remote");
     
-    while (Modes == REMOTE_FLAG) {
+    while ((1 || Serial.println(Modes)) && Modes == REMOTE_FLAG) {
         switch (Order) {
         case forward:
             Serial.println("for");
