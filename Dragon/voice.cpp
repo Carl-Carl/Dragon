@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-27 21:19:18
+ * @LastEditTime: 2020-10-27 21:32:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -80,10 +80,7 @@ const auto OFF_SET = 0;
 
 void voice::mode()
 {
-    Serial.println("voice");
-
-    static u8 last = 0;
-    while (Modes == VOICE_FLAG && (1 || Serial.println(Modes))) {
+    while (Modes == VOICE_FLAG) {
         // get distance information
         DIST_INFO distance;
         get_dist(distance);
@@ -108,30 +105,19 @@ void voice::mode()
         if (front <= 10) {
             control.backward();
             time = 200;
-            last = 0;
-        } else if (lr >= 1.4) {   // 大转弯
-            control.turn_left(speed);
+        } else if (lr >= 1.2) {   // 大转弯
+            control.forward(speed-10, speed);
             delay(150);
             control.forward(speed, speed);
             time = 250;
-            last = 1;
-        } else if (lr <= 0.714) {
-            control.turn_right(speed);
+        } else if (lr <= 0.833) {
+            control.forward(speed, speed-10);
             delay(150);
             control.forward(speed, speed);
             time = 250;
-            last = 2;
         } else {
-            if (last == 1) {
-                control.turn_right(speed);
-                delay(100);
-            } else if (last == 2) {
-                control.turn_left(speed);
-                delay(100);
-            }
             control.forward(speed, speed);
             time = 300;
-            last = 0;
         }
 
         delay(time);
