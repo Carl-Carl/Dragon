@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-10-13 08:29:55
- * @LastEditTime: 2020-10-27 21:08:17
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-10-27 21:33:51
+ * @LastEditors: your name
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Infrared.cpp
  */
@@ -47,12 +47,12 @@ void Infrared::mode()
 
         if(leftsum > rightsum)
         {
-            control.turn_left(ANALOG_SLOW);
+            control.forward(ANALOG_SLOW, ANALOG_MAX); //left
         }
 
         if(leftsum < rightsum)
         {
-            control.turn_right(ANALOG_SLOW);
+            control.forward(ANALOG_MAX, ANALOG_SLOW); //right
         }
     }
     
