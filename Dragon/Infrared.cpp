@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-10-13 08:29:55
- * @LastEditTime: 2020-10-28 13:49:05
- * @LastEditors: your name
+ * @LastEditTime: 2020-10-28 13:52:58
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Infrared.cpp
  */
@@ -31,7 +31,6 @@ Infrared::Infrared(motor &_control, u8 l_3, u8 l_2, u8 l_1, u8 r_1, u8 r_2, u8 r
 
 void Infrared::mode()
 {
-    Serial.println("infrared");
 
     while (Modes == INFRARED_FLAG && (Serial.println(Modes) || 1))
     {

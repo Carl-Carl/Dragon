@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-28 13:50:20
+ * @LastEditTime: 2020-10-28 14:10:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -105,12 +105,12 @@ void voice::mode()
         if (front <= 10) {
             control.backward();
             time = 200;
-        } else if (lr >= 1.2) {   // 大转弯
+        } else if (lr >= 1.5) {   // 大转弯
             control.forward(speed >> 1, speed);
             // delay(150);
             // control.forward(speed, speed);
             time = 250;
-        } else if (lr <= 0.833) {
+        } else if (lr <= 0.667) {
             control.forward(speed, speed >> 1);
             // delay(150);
             // control.forward(speed, speed);
