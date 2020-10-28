@@ -1,8 +1,8 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-27 21:03:17
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-10-28 13:35:00
+ * @LastEditors: your name
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
  */

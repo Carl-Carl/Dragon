@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-13 08:29:55
- * @LastEditTime: 2020-10-27 21:33:51
+ * @LastEditTime: 2020-10-28 13:49:05
  * @LastEditors: your name
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Infrared.cpp
@@ -35,7 +35,6 @@ void Infrared::mode()
 
     while (Modes == INFRARED_FLAG && (Serial.println(Modes) || 1))
     {
-        Serial.println("ininin");
         if(digitalRead(left1) == HIGH && digitalRead(right1) == HIGH)
         {
             control.forward(ANALOG_MAX, ANALOG_MAX); 
@@ -47,12 +46,22 @@ void Infrared::mode()
 
         if(leftsum > rightsum)
         {
-            control.forward(ANALOG_SLOW, ANALOG_MAX); //left
+            control.turn_left(ANALOG_SLOW);  //left
+            if(digitalRead(left1) == HIGH && digitalRead(right1) == HIGH)
+            {
+                control.brake();
+                delay(50); 
+            }
         }
 
         if(leftsum < rightsum)
         {
-            control.forward(ANALOG_MAX, ANALOG_SLOW); //right
+            control.turn_right(ANALOG_SLOW);  //right
+            if(digitalRead(left1) == HIGH && digitalRead(right1) == HIGH)
+            {
+                control.brake();
+                delay(50); 
+            }
         }
     }
     
