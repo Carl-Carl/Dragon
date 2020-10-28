@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-10-13 08:29:55
- * @LastEditTime: 2020-10-27 21:33:51
- * @LastEditors: your name
+ * @LastEditTime: 2020-10-28 13:33:59
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Infrared.cpp
  */
@@ -35,7 +35,6 @@ void Infrared::mode()
 
     while (Modes == INFRARED_FLAG && (Serial.println(Modes) || 1))
     {
-        Serial.println("ininin");
         if(digitalRead(left1) == HIGH && digitalRead(right1) == HIGH)
         {
             control.forward(ANALOG_MAX, ANALOG_MAX); 
