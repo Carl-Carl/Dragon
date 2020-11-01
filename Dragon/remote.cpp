@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:45:26
- * @LastEditTime: 2020-10-27 21:30:07
+ * @LastEditTime: 2020-10-31 20:23:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\remote.cpp
@@ -17,14 +17,13 @@ remote::remote(motor &_control, Servo &shoot_gun, void sig()) : control(_control
 
 void remote::fire()
 {
+    Timer1.detachInterrupt();
     shootgun.attach(4);
-    delay(10);
-    
-    shootgun.write(90);
-    delay(140);
+    shootgun.write(80);
+    delay(150);
     
     shootgun.write(0);
-    delay(140);
+    delay(170);
     shootgun.detach();
     Timer1.attachInterrupt(signal, 50000);
 }
@@ -34,8 +33,9 @@ static int SPEED = ANALOG_MAX;
 void remote::mode()
 {
     Order = wait;
+    Serial.println(Modes);
     
-    while ((1 || Serial.println(Modes)) && Modes == REMOTE_FLAG) {
+    while (Modes == REMOTE_FLAG) {
         switch (Order) {
         case forward:
             control.forward(SPEED, SPEED);
@@ -46,11 +46,11 @@ void remote::mode()
             break;
 
         case left:
-            control.turn_left(SPEED);
+            control.turn_left(SPEED + 15);
             break;
 
         case right:
-            control.turn_right(SPEED);
+            control.turn_right(SPEED + 15);
             break;
 
         case brake:

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-09 11:16:31
- * @LastEditTime: 2020-10-27 21:10:58
+ * @LastEditTime: 2020-10-31 20:22:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\Dragon.ino
@@ -126,18 +126,10 @@ void signal()
     } else if (Modes == INFRARED_FLAG && st == 2) {
         Modes = VOICE_FLAG;
         Serial.println("to voice_mode");
+    } else if (Modes != REMOTE_FLAG && st == 1) {
+        // motor_control.forward(ANALOG_MAX, ANALOG_MAX);
+        // delay(300);
+     
+        Modes = (int)REMOTE_FLAG;
     }
-    // } else if (Modes != REMOTE_FLAG && st == 1) {
-    //     motor_control.forward(ANALOG_MAX, ANALOG_MAX);
-
-    //     if (start) {    // 启动时
-    //         while (infrared_mode.canStop());
-    //         start = false;
-    //     } else {        // 停止时
-    //         delay(800);
-    //         Modes = REMOTE_FLAG;
-    //     }
-
-    //     motor_control.brake();
-    // }
 }

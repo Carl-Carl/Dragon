@@ -90,7 +90,7 @@ void voice::mode()
         u16 right = (distance.right < 50) ? 100 : distance.right / time_change;
 
         double lr = (double)distance.left / distance.right;
-        u8 speed = ANALOG_MAX + OFF_SET;
+        u8 speed = ANALOG_MAX + 40;
         // lr = lr > 1.5 ? 1.5 : lr;
         // lr = lr < 0.67 ? 0.67 : lr;
 
