@@ -1,7 +1,7 @@
 /*
  * @Author: XHM
  * @Date: 2020-10-09 11:12:25
- * @LastEditTime: 2020-10-31 13:44:51
+ * @LastEditTime: 2020-11-01 13:06:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Voiced:\Files\Arduino\Dragon\dragon.h
@@ -31,6 +31,7 @@
 #define     R_4                 A3
 #define     R_5                 A4
 #define     R_6                 A5
+#define     MID                 13
 
 
 /* Motor pins */

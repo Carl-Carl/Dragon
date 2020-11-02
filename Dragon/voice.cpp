@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-10 15:28:59
- * @LastEditTime: 2020-10-28 14:10:50
+ * @LastEditTime: 2020-11-01 13:07:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Dragon\voice.cpp
@@ -36,7 +36,7 @@ void voice::get_dist(DIST_INFO &distance)
     u8 ports[3] = {front_pin, left_pin, right_pin};
     u16 temp[10];
 
-    for (u8 i = 0; i < 3; ++i) {
+    for (u8 i = 1; i < 3; ++i) {
         // 取平均值
         for (u8 j = 0; j < 10; ++j) {
             // send begin order
@@ -46,9 +46,6 @@ void voice::get_dist(DIST_INFO &distance)
 
             temp[j] = pulseIn(ports[i], HIGH, 15000);
 
-            if (!temp[j]) {
-                // *******//
-            }
             delay(1);
         }
 
@@ -85,12 +82,12 @@ void voice::mode()
         DIST_INFO distance;
         get_dist(distance);
 
-        u16 front = (distance.front < 50) ? 100 : distance.front / time_change;
+        u16 front =  100;
         u16 left  = (distance.left  < 50) ? 100 : distance.left  / time_change;
         u16 right = (distance.right < 50) ? 100 : distance.right / time_change;
 
         double lr = (double)distance.left / distance.right;
-        u8 speed = ANALOG_MAX + 40;
+        u8 speed = ANALOG_MAX + 20;
         // lr = lr > 1.5 ? 1.5 : lr;
         // lr = lr < 0.67 ? 0.67 : lr;
 
@@ -106,11 +103,13 @@ void voice::mode()
             control.backward();
             time = 200;
         } else if (lr >= 1.5) {   // 大转弯
+            speed += 50;
             control.forward(speed >> 1, speed);
             // delay(150);
             // control.forward(speed, speed);
             time = 250;
         } else if (lr <= 0.667) {
+            speed += 50;
             control.forward(speed, speed >> 1);
             // delay(150);
             // control.forward(speed, speed);

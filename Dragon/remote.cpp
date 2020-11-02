@@ -28,7 +28,7 @@ void remote::fire()
     Timer1.attachInterrupt(signal, 50000);
 }
 
-static int SPEED = ANALOG_MAX;
+static int SPEED = ANALOG_MAX + 10;
 
 void remote::mode()
 {
