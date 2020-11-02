@@ -3,14 +3,21 @@
         {
             "name": "Win32",
             "includePath": [
-                "D:\\Program Files\\Arduino\\**",
-                "C:\\Users\\xhm2001\\Documents\\Arduino\\libraries\\**",
-                "D:\\Files\\Resource\\Github\\Dragon\\Dragon\\",
-                "D:\\Program Files\\Arduino\\hardware\\arduino\\avr\\**",
-                "D:\\Program Files\\Arduino\\tools\\**"
+
+                "C:\\Program files (x86)\\Arduino\\**",
+                "C:\\Program files (x86)\\Arduino\\tools\\**",
+                "C:\\Program files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
+                "C:\\Program files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
+                "C:\\Program files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\",
+                "C:\\Users\\Snowball\\Documents\\GitHub\\Dragon\\Dragon\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
+                "C:\\Program Files (x86)\\Arduino\\tools\\**",
+                "C:\\Program Files (x86)\\Arduino\\libraries\\**",
+                "${workspaceFolder}"
             ],
             "forcedInclude": [
-                "D:\\Program Files\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+                "C:\\Program files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
             ],
             "defines": [
                 "USBCON"
